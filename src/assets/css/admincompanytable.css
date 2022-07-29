@@ -1,0 +1,51 @@
+.darkRow{
+    background-color: black;
+    color: white;
+}
+
+.td{
+    display: flex;
+    justify-content: center;
+}
+
+.myFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* max-width: 325px;  */
+}
+
+.my-input{
+    display: inline;
+    width: 74%;
+    max-width: 255px;
+    /* margin-right: 5px; */
+    min-width: 150px;
+}
+
+.myBtn{
+    width: 25%;
+    min-width: 90px;
+}
+
+#adminCOmpanyTable{
+    padding-left: 17%;
+    padding-top: 70px;
+    overflow-x: scroll;
+}
+::-webkit-scrollbar{
+    width: 2px;
+}
+@media screen and (max-width:992px) {
+    #adminCOmpanyTable{
+        padding-left: 26%;
+        padding-top: 70px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #adminCOmpanyTable{
+        padding-left: 0;
+        padding-top: 70px;
+    }
+}
