@@ -1,34 +1,84 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../../assets/css/style.css"
+import "../../assets/css/studentdashboardhome.css"
+
 export default function AdminDashboard() {
+
+  const [dashboardDetials, setDashboardDetials] = useState({});
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/admin/dashboard/details", { withCredentials: true })
+      .then(res => {
+        setDashboardDetials(res.data.dashboard_details);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err.data);
+      })
+  }, []);
+
   return (
     <div>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" style={{justifyContent: "end",paddingTop:"7rem",paddingBottom:"3rem"}}  id="adminDashBoardNum">
-      <div className="col d-flex align-items-start">
-      <i className="bi bi-people"></i>
-        {/* <svg className="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"></use></svg> */}
-        <div>
-          <h4 className="fw-bold mb-0">534</h4>
-          <p>Enrolled students</p>
+      <div id="studentdashboard">
+        <div className="row">
+          <div className="col-md-4 my-5">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title">Enrolled students</h5>
+                <p className="card-text"></p>
+                <div className="col d-flex align-items-center">
+                  <i className="bi bi-people"></i>
+                  <div>
+                    <h4 className="fw-bold mb-0">{dashboardDetials.totalStudents}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 my-5">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title">Visited companies</h5>
+                <p className="card-text"></p>
+                <div className="col d-flex align-items-center">
+                <i class="bi bi-building"></i>
+                  <div>
+                    <h4 className="fw-bold mb-0">{dashboardDetials.totalCompanies}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><div className="col-md-4 my-5">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title">Placed students</h5>
+                <p className="card-text"></p>
+                <div className="col d-flex align-items-center">
+                <i class="bi bi-mortarboard"></i>
+                  <div>
+                    <h4 className="fw-bold mb-0">{dashboardDetials.placedStudents}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 my-5">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title">Average CTC</h5>
+                <p className="card-text"></p>
+                <div className="col d-flex align-items-center">
+                <i class="bi bi-currency-rupee"></i>
+                  <div>
+                    <h4 className="fw-bold mb-0">{parseFloat(dashboardDetials.averageCTC).toFixed(3)} LPA</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="col d-flex align-items-start">
-      <i className="bi bi-building"></i>
-        {/* <svg className="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg> */}
-        <div>
-          <h4 className="fw-bold mb-0">73</h4>
-          <p>Visited companies</p>
-        </div>
-      </div>
-      <div className="col d-flex align-items-start">
-      <i className="bi bi-people"></i>
-        {/* <svg className="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg> */}
-        <div>
-          <h4 className="fw-bold mb-0">493</h4>
-          <p>Placed students</p>
-        </div>
-      </div>
-    </div>
     </div>
   );
 }

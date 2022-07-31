@@ -185,3 +185,28 @@
     padding-top: 5px;
     margin: 10px;
   }
+
+  .navbar .userNavbar{
+    padding-right: 75px;
+    color: white;
+    font-size: 18px;
+  }
+  .navbar .userNavbar:hover{
+    cursor: pointer;
+  }
+
+  #studentdashboard .d-flex{
+    justify-content: center;
+  }
+
+  #studentdashboard .d-flex i{
+    margin-right: 10px;
+    font-size: 30px;
+    color: #1e88e5;
+  }
+#studentdashboard .col-md-4 .card{
+  margin-right: 5px;
+}
+  #studentdashboard .col-md-4 .card:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  }

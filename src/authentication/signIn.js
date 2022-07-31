@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/login.css";
 
 const LoginForm = () => {
+
+  const navigate = useNavigate();
 
   const [alertMessage, setalertMessage] = React.useState({
     message: "",
@@ -33,9 +36,20 @@ const LoginForm = () => {
       axios.post(`http://localhost:8080/${usertype}/login`, formValue, { withCredentials: true })
       .then(res => {
         console.log(res.data);
+        setalertMessage({
+          ...alertMessage,
+          wholeAlert: "alert d-block alert-success",
+          message: "Login successfull!",
+        })
+        navigate(`${usertype}/dashboard`);
       })
-      .catch(res => {
-        console.log(res.data);
+      .catch(err => {
+        setalertMessage({
+          ...alertMessage,
+          wholeAlert: "alert d-block alert-danger",
+          message: "Incorrect email and password combination!",
+        })
+        console.log(err.data);
       })
     }
   }
@@ -88,6 +102,10 @@ const LoginForm = () => {
               </label>
             </div>
           </div>
+          <div style={{textAlign:"right"}}>
+            <Link to="password/forgot">Forgot password</Link>
+          </div>
+          <br />
           <button onClick={formValidate} className="btn btn-primary">Sign In</button>
 
         </main>
