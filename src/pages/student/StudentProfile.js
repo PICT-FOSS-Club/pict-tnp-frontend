@@ -6,17 +6,28 @@ import "../../assets/css/studentprofile.css"
 const StudentProfile = () => {
 
   const [student, setStudent] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:8080/student/me', { withCredentials: true })
       .then((res) => {
-        console.log('After get request:', res.data);
+        // console.log('After get request:', res.data);
         setStudent(res.data.student);
+        setLoading(false);
       })
       .catch((err) => {
         console.log('Error in get req:', err);
+        setLoading(false);
       })
   }, []);
+
+  if (isLoading) {
+    return <div className="text-center">
+    <div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>;
+}
 
   return (
     <div className="container bootstrap student snippets bootdey">
@@ -53,7 +64,7 @@ const StudentProfile = () => {
                 </div>
                 <div className="bio-row">
                   <p>
-                    <span>DOB: </span> {student.dob}
+                    <span>DOB: </span> {student.dob.split('T')[0]}
                   </p>
                 </div>
                 <div className="bio-row">

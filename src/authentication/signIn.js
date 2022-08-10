@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/login.css";
+import { useCookies } from "react-cookie";
 
 const LoginForm = () => {
 
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["usertype", "username", "token1"]);
 
   const [alertMessage, setalertMessage] = React.useState({
     message: "",
@@ -41,7 +43,11 @@ const LoginForm = () => {
           wholeAlert: "alert d-block alert-success",
           message: "Login successfull!",
         })
+        setCookie("token1", res.data.token, { path: "/", maxAge: 43200 }); // 30 days
+        setCookie("usertype", `${usertype}`, { path: "/", maxAge: 43200 });
+        setCookie("username", res.data?.student?.firstName, { path: "/", maxAge: 43200 });
         navigate(`${usertype}/dashboard`);
+        // navigate(`student/dashboard`);
       })
       .catch(err => {
         setalertMessage({
@@ -49,7 +55,7 @@ const LoginForm = () => {
           wholeAlert: "alert d-block alert-danger",
           message: "Incorrect email and password combination!",
         })
-        console.log(err.data);
+        console.log('errrr',err);
       })
     }
   }

@@ -3,10 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import "../../assets/css/studentprofile.css"
+import CompanyDetails from '../student/CompanyDetails';
 
 const AdminStudentDetails = () => {
 
     const params = useParams();
+    const [isLoading, setLoading] = useState(true);
     const [student, setStudent] = useState({});
 
     useEffect(() => {
@@ -14,11 +16,16 @@ const AdminStudentDetails = () => {
             .then((res) => {
                 console.log('After get request:', res.data);
                 setStudent(res.data.data);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log('Error in get req:', err);
             })
-    }, [params.studentId]);
+    }, []);
+
+    if (isLoading) {
+        return <div className="App">Loading...</div>;
+    }
 
     return (
         <div className="container bootstrap snippets student bootdey">
@@ -30,10 +37,45 @@ const AdminStudentDetails = () => {
                         <div className="bio-graph-heading">
                             <h1> {student.firstName} {student.middleName} {student.lastName}</h1>
                         </div>
-                        <div className="companyRoundDetails">
-                        <div className="card my-3">
-                        <div className="card-header">
-                                   <Link to="/admin/company/details"> TCS </Link>
+                        <div className="panel-body bio-graph-info">
+                            <h3>Applied Companies Status</h3>
+                            {student.appliedCompanies.reverse().map((company, key) => (
+                                <div className="companyRoundDetails" key={key}>
+                                <div className="card my-3">
+                                    <div className="card-body">
+                                        <Link to={`/admin/company/details/${company.companyId}`}> {company.name} </Link>
+                                        {(company.roundCleared === 0 && company.result) ? 
+                                        (<button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>) : 
+                                        ((company.result) ? 
+                                            (<button type="button" className={`btn ${company.totalRounds === company.roundCleared ? 'btn-sucess' : 'btn-primary'}`} data-tooltip={`${company.totalRounds === company.roundCleared ? 'Selected' : 'Cleared'}`}>Round {`${company.roundCleared}`}</button>) : 
+                                            (<button type="button" className="btn btn-danger" data-tooltip="Uncleared">Round {`${company.roundCleared+1}`}</button>)
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            ))}
+                        </div>
+                        {/* {student.appliedCompanies.map((company, key) => (
+                            <div className="companyRoundDetails" key={key}>
+                            <div className="card my-3">
+                                <div className="card-header">
+                                    <Link to={`/admin/company/details/${company.companyId}`}> {company.name} </Link>
+                                </div>
+                                <div className="card-body">
+                                    {(company.roundCleared === 0 && company.result) ? 
+                                    (<button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>) : 
+                                    ((company.result) ? 
+                                        (<button type="button" className={`btn ${company.totalRounds === company.roundCleared ? 'btn-sucess' : 'btn-primary'}`} data-tooltip={`${company.totalRounds === company.roundCleared ? 'Selected' : 'Cleared'}`}>Round {`${company.roundCleared}`}</button>) : 
+                                        (<button type="button" className="btn btn-danger" data-tooltip="Uncleared">Round {`${company.roundCleared+1}`}</button>)
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        ))} */}
+                        {/* <div className="companyRoundDetails">
+                            <div className="card my-3">
+                                <div className="card-header">
+                                    <Link to="/admin/company/details"> TCS </Link>
                                 </div>
                                 <div className="card-body">
                                     <button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>
@@ -42,20 +84,20 @@ const AdminStudentDetails = () => {
                                     <button type="button" className="btn btn-primary" data-tooltip="Cleared">Round 3</button>
                                     <button type="button" className="btn btn-success" data-tooltip="Selected">Round 4</button>
                                 </div>
-                        </div>
+                            </div>
                         </div>
                         <div className="companyRoundDetails">
-                        <div className="card my-3">
-                        <div className="card-header">
-                                <Link to="/admin/company/details"> PhonePe </Link>
+                            <div className="card my-3">
+                                <div className="card-header">
+                                    <Link to="/admin/company/details"> PhonePe </Link>
                                 </div>
                                 <div className="card-body">
                                     <button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>
                                     <button type="button" className="btn btn-primary" data-tooltip="Cleared">Round 1</button>
                                     <button type="button" className="btn btn-danger" data-tooltip="Uncleared">Round 2</button>
                                 </div>
-                        </div>
-                        </div>
+                            </div>
+                        </div> */}
                         <div className="panel-body bio-graph-info">
                             <h3> Personal Information</h3>
                             <div className="row">
@@ -166,7 +208,6 @@ const AdminStudentDetails = () => {
                                         <span>Year of 12th/Diploma passing: </span> {student.yearOFPassingSsc}
                                     </p>
                                 </div>
-
                             </div>
                         </div>
 

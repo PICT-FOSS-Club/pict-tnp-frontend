@@ -1,0 +1,102 @@
+${
+Amcat eligibility
+
+Attendance eligibility
+
+Active and passive backlog
+
+Percentage formula for cgpa
+
+SSC gap
+
+HSC gap
+
+Year gap
+
+cgpa aggre.
+
+Engineering cgpa while adding company
+}
+//kedar and gaurav
+
+$Adding pdf while adding company
+//rohit
+
+@Adding logo in copyright 
+
+@Highlight the criteria which student is not eligible 
+
+@And disable apply button
+
+$Generating report
+//vinayak
+
+@Placement report generation automatically ChartJS
+1. PiChart - branchwise
+2. Graphs
+
+@Form for adding company
+//sangmeshwar
+
+//12 Aug, fri
+
+
+Adding criterion for documents
+
+
+
+
+
+
+Validation of name and all fields
+
+
+
+Image of student 
+//upload when login
+
+Instruction for students to have image on resume
+
+
+
+
+Rounds can be changed dynamically
+
+Editing round
+
+
+
+Remove contact details of company details
+
+Compulsory to change password on first login
+
+Increase security
+
+Adding FaQs 
+//later
+
+Round details -> drive details 
+
+
+
+
+//Hide the companies which he is not eligible
+
+
+Differential package
+//after 12th aug
+
+Creating manual how to use tnp portal
+//frontend
+
+Displaying average of student branch wise course wise.
+
+Placed student should upload offer Letter by admin and student
+
+Seperate portal for previous year students
+
+#Login welcome for students and admin
+
+User talk and wa group for development and coordination team
+
+Processing Image of qualified students 

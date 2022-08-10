@@ -8,11 +8,13 @@ import AddCompanyForm from './AddCompanyForm'
 const AdminCompanyTable = () => {
 
     const [companyTable, setCompanyTable] = useState([]);
-
+    const [isLoading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     // on change states
-    const[companyId, setCompanyId] = useState('');
+    // const[companyId, setCompanyId] = useState('');
     const [excelFile, setExcelFile] = useState(null);
     const [excelFileError, setExcelFileError] = useState(null);
     
@@ -56,8 +58,10 @@ const AdminCompanyTable = () => {
                 const result = { companyId: e.target.value, qualifiedStudents: data };
                 console.log(result);
                 axios.post('http://localhost:8080/company/round/result',result , {withCredentials: true})
-                .then(function (res) {
-                    navigate("#")
+                .then((res)=>{
+                    alert("Compnay round updated")
+                    // navigate("/")
+                    window.location.reload();
                     console.log(res);
                 })
                 .catch(function (error) {
@@ -69,21 +73,36 @@ const AdminCompanyTable = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/admin/company/all", { withCredentials: true })
             .then((res) => {
+                // console.log(res);
                 setCompanyTable(res.data.data);
+                setLoading(false);
             }).catch((err) => {
                 console.log('err', err);
+                setLoading(false);
             })
     }, [])
 
+    if (isLoading) {
+        return <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>;
+    }
 
     return (
         <div id="adminCOmpanyTable">
+                    <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Company table</h3></div>
             <div className="row my-3">
                 <div className="d-flex justify-content-between">
-                    <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Company table</h3></div>
-                    <div className="col-md-3" /> 
-                    <button className="col-md-2 btn btn-primary col-sm-6 cl-sx-6 col-6" data-bs-toggle="modal" data-bs-target="#AddCompanyForm"><i className="bi bi-plus-circle"></i> Add a Company</button>
-                    <div className="col-md-1" /> 
+                    <div className="filter col-md-3">
+                        <label htmlFor="exampleInputEmail1" className="form-label">Search company</label>
+                        <input type="text" className="form-control" id="exampleInputEmail1" placeholder='search for...' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} aria-describedby="emailHelp" />
+                        <div id="emailHelp" className="form-text">Enter the name of company</div>
+                    </div>
+                    <div className="col-md-3"> 
+                    <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddCompanyForm"><i className="bi bi-plus-circle"></i> Add a Company</button>
+                    </div>
                 </div>
             </div>
             <table className="table table-hover">
@@ -93,7 +112,7 @@ const AdminCompanyTable = () => {
                         <th scope="col">Job</th>
                         <th scope="col">Round</th>
                         <th scope="col" className='text-center'>Update</th>
-                        <th scope="col">Schedule</th>
+                        {/* <th scope="col">Schedule</th> */}
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -113,7 +132,7 @@ const AdminCompanyTable = () => {
                         <td>25/11/2022</td>
                         <td><a href="#">View</a></td>
                     </tr> */}
-                    {companyTable.map((company, key) => (
+                    {/* {companyTable.map((company, key) => (
                         <tr key={key}>
                             <td>{company.name}</td>
                             <td>{company.profile}</td>
@@ -126,10 +145,29 @@ const AdminCompanyTable = () => {
                                     </div>
                                 </form>
                             </td>
-                            <td>{company.currentRound >= company.totalRounds ? "Completed" : !company.currentRound ? company.driveDetails[0].date : company.driveDetails[company.currentRound + 1].date }</td>
+                            {/* <td>{company.currentRound >= company.totalRounds ? "Completed" : !company.currentRound ? company.driveDetails[0].date : company.driveDetails[company.currentRound + 1].date }</td> 
                             <td><Link to={`/admin/company/details/${company._id}`}>View</Link></td>
                         </tr>
-                    ))}
+                    ))} */}
+                    {companyTable.filter(company => company.name.toLowerCase().includes(searchQuery.toLowerCase())).map((company => (
+              
+                        <tr key={company.name}>
+                        <td>{company.name}</td>
+                        <td>{company.profile}</td>
+                        <td><span className={`badge px-3 ${company.currentRound === company.totalRounds ? "bg-danger" : !company.currentRound ? "bg-primary" : "bg-success" } `}>{ (company.currentRound === company.totalRounds) ? "Complete" : (!company.currentRound) ? "Upcoming" : `Round - ${company.currentRound}` }</span></td>
+                        <td className="td">
+                            <form>
+                                <div className="myFlex">
+                                    <input className="my-input mx-1 mx-1 mx-1 form-control form-control-sm" type="file" onChange={handleFile}/>
+                                    <button type="submit" className="myBtn btn btn-primary" onClick={handleSubmit} value={company._id}>Update</button>
+                                </div>
+                            </form>
+                        </td>
+                        {/* <td>{company.currentRound >= company.totalRounds ? "Completed" : !company.currentRound ? company.driveDetails[0].date : company.driveDetails[company.currentRound + 1].date }</td> */}
+                        <td><Link to={`/admin/company/details/${company._id}`}>View</Link></td>
+                    </tr>
+                   )))}
+
                 </tbody>
             </table>
             <AddCompanyForm />

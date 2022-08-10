@@ -1,180 +1,209 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-
-import "../../assets/css/studentprofile.css"
-import { useParams } from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "../../assets/css/studentprofile.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 const CompanyDetails = () => {
-    const params = useParams();
-    const [company, setCompany] = useState({});
+  const params = useParams();
+  const [isLoading, setLoading] = useState(true);
+  const [company, setCompany] = useState({});
+  const [resume, setResume] = useState(null);
 
-    useEffect(() => {
-        axios.get(`http://localhost:8080/student/company/details/${params.companyId}`, { withCredentials: true })
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/student/company/details/${params.companyId}`,
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log("After get request:", res.data.data);
+        setCompany(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("Error in get req:", err);
+        setLoading(false);
+      });
+  }, [params.companyId]);
+
+  if (isLoading) {
+    return <div className="text-center">
+    <div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>;
+}
+
+  const handleChangeFile = (e) => {
+    setResume(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (resume) {
+      console.log(company._id);
+      axios
+        .post(
+          "http://localhost:8080/student/company/apply",
+          { companyId: company._id },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log("First ", res);
+          if (res.status == 403) {
+            return alert("You are not eligible Apply to this Company!");
+          }
+          //
+          const formData = new FormData();
+          formData.append("resume", resume);
+          const config = {
+            headers: { "content-type": "multipart/form-data" },
+            withCredentials: true,
+          };
+          axios
+            .post(
+              `http://localhost:8080/student/resume/upload/${company._id}`,
+              formData,
+              config
+            )
             .then((res) => {
-                console.log('After get request:', res.data.data);
-                setCompany(res.data.data);
+              console.log("Second ", res.data);
+              alert("Successfully applied to the Company!");
+              navigate("/student/dashboard");
             })
             .catch((err) => {
-                console.log('Error in get req:', err);
-            })
-    }, []);
+              console.log("Error while upload document.");
+            });
+        })
+        .catch((err) => {
+          console.log("Error", err);
+          if (err.request.status == 403) {
+            return alert("You are not eligible Apply to this Company!");
+          }
+          // console.log("Error while applying to company.");
+        });
+    }
+  };
 
-    return (
-        <div className="container company bootstrap snippets bootdey">
-            <div>
-                <div className="profile-info">
-                    <div className="panel">
-                    </div>
-                    <div className="panel">
-                        <div className="bio-graph-heading">
-                            <h1>{company.name}</h1>
-                            <span>{company.profile}</span>
-                            <p>₹ {company.ctc} LPA</p>
-                        </div>
-                        <div className="panel-body bio-graph-info">
-                            <h3>About company</h3>
-                            <div className="row">
-                                <div className='companyInfo'>
-                                    PhonePe is an Indian digital payments and financial technology company headquartered in Bengaluru, Karnataka, India. PhonePe was founded in December 2015, by Sameer Nigam, Rahul Chari and Burzin Engineer. The PhonePe app, based on the Unified Payments Interface (UPI), went live in August 2016. It is owned by Flipkart, a subsidiary of Walmart.
-                                </div>
-                                <div className='companyROInfo'>
-                                    <b> Date Time:  </b>
-                                    {company.startDate}
-                                </div>
-                                <div className='companyROInfo'>
-                                    <b> Branch:    </b>
-                                    {/* {company.criteria.branch.cs ? "CE" : ""} {company.criteria.branch.it ? ", IT" : ""} {company.criteria.branch.entc ? "and E&TC" : ""} ({company.criteria.courseName.ug ? "UG" : ""}{company.criteria.courseName.pg ? " PG" : ""}) */}
-                                </div>
-                                <div className='companyROInfo'>
-                                    <b>Criteria:  </b>
-                                        {/* cgpa {company.criteria.cgpa} */}
-                                </div>
-                                <div className='companyROInfo'>
-                                    <b>Email:  </b>
-                                    {company.email}
-                                </div>
-                                    <div className='companyROInfo'>
-                                        <b>Website:  </b><a href={company.websiteUrl}><i className="bi bi-globe"></i></a>
-
-                                    </div>
-                            </div>
-                        </div>
-
-
-                        <div className="panel-body bio-graph-info">
-                            <h3>Round details</h3>
-                            <div className="row">
-                                <ul className="main__list">
-
-                                    <li className="main__list-item">
-                                        <div>
-                                            <p className="main__list-content">Center Point</p>
-                                        </div>
-                                    </li>
-
-                                    {/* {company.driveDetails.map((round)=>{
-                                        return (<li className="main__list-item" key={round.roundNo}>
-                                        <div className="main__list-content-wrap">
-                                            <p className="main__list-content">{round.activity}</p>
-                                            <p className="main__list-sub gray">Round {round.roundNo}  - {round.date > Date.now() ? "Upcoming" : "Ended"}
-                                                <p className="main__list-sub gray">{round.date} {round.time}</p>
-                                                <p className="main__list-sub gray">{round.venue}</p>
-                                            </p>
-                                        </div>
-                                    </li>)
-                                    })} */}
-
-                                    <li className="main__list-item">
-                                        <div className="main__list-content-wrap">
-                                            <p className="main__list-content">HR Interview of shortlisted students</p>
-                                            <p className="main__list-sub gray">Round 4 - upcoming
-                                                <p className="main__list-sub gray">29/08/2022</p>
-                                            </p>
-
-                                        </div>
-                                    </li>
-
-                                    <li className="main__list-item">
-                                        <div className="main__list-content-wrap">
-                                            <p className="main__list-content">Technical Interview</p>
-                                            <p className="main__list-sub gray">Round 3 - upcoming
-                                                <p className="main__list-sub gray">25/08/2022</p>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="main__list-item">
-                                        <div className="main__list-content-wrap">
-                                            <p className="main__list-content">Online Test</p>
-                                            <p className="main__list-sub error">Round 2 - ended
-                                                <p className="main__list-sub gray">20/08/2022</p>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="main__list-item">
-                                        <div className="main__list-content-wrap">
-                                            <p className="main__list-content">PPT</p>
-                                            <p className="main__list-sub error">Round 1 - ended
-                                                <p className="main__list-sub gray">15/08/2022</p>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-
-                        <div className="panel-body  bio-graph-info">
-                            <h3>Skills required</h3>
-                            <div className="row companySkillBody">
-                                <div>
-                                    {/* {console.log(company.skillsRequired)} */}
-                                    {/* {company.skillsRequired.map((skill)=>{
-                                        return(
-                                        <div key={skill+"1"}>
-                                            <i className="bi bi-arrow-right-circle" /> {skill} <br /> <br />
-                                        </div>
-                                        )
-                                    })} */}
-                                    <i className="bi bi-arrow-right-circle"></i> Deep expertise in at least one programming language (e.g., Java, C, C++) & tech stack to write maintainable, scalable, unit-tested code. <br /> <br />
-                                    <i className="bi bi-arrow-right-circle"></i> Understanding of object-oriented design skills, knowledge of design patterns, and huge passion and ability to <br /><br />
-                                    <i className="bi bi-arrow-right-circle"></i> Ability to channel high-level guidance to direct the building of large and complex business applications and platforms. <br /><br />
-                                    <i className="bi bi-arrow-right-circle"></i> Go-getter attitude that reflects in energy and intent behind assigned tasks <br /><br />
-                                    <i className="bi bi-arrow-right-circle"></i> Some understanding of design patterns, optimizations, deployments and tuning, understanding of databases (e.g., MySQL), good to have is knowledge of NoSQL (e.g. HBase, Elasticsearch, Aerospike etc.) <br /><br />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="panel-body  bio-graph-info">
-                            <h3>Apply</h3>
-                            <div className="row companySkillBody">
-                            <form>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Select resume</label>
-                        <input type="file" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                        <div id="emailHelp" className="form-text">Select only if, you have other than default resume</div>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Accept all terms and conditions</label>
-                    </div>
-                    <button type="submit" className="btn btn-primary">Apply</button>
-</form>
-                            </div>
-
-                    </div>
+  return (
+    <div className="container company bootstrap snippets bootdey">
+      <div>
+        <div className="profile-info">
+          <div className="panel"></div>
+          <div className="panel">
+            <div className="bio-graph-heading">
+              <h1>{company.name}</h1>
+              <span>{company.profile}</span>
+              <p>₹ {company.ctc} LPA</p>
+            </div>
+            <div className="panel-body bio-graph-info">
+              <h3>About company criteria</h3>
+              <div className="row">
+                <div className="companyROInfo">
+                  <b> Branch: </b>
+                  {company.criteria.branch.cs ? "CE" : ""}{" "}
+                  {company.criteria.branch.it ? ", IT" : ""}{" "}
+                  {company.criteria.branch.entc ? "and E&TC" : ""} (
+                  {company.criteria.courseName.ug ? "UG" : ""}
+                  {company.criteria.courseName.pg ? " PG" : ""})
                 </div>
-            </div>
-            </div>
+                <div className="companyROInfo">
+                  <b>Minimum CGPA Criteria: </b>
+                  {company.criteria.cgpa}
+                </div>
+                <div className="companyROInfo">
+                  <b>Email: </b>
+                  {company.email}
+                </div>
+                <div className="companyROInfo">
+                  <b>Website: </b>
+                  <a href={`http://${company.websiteUrl}`} target="_blank">
+                    <i className="bi bi-globe"></i>
+                  </a>
+                </div>
+              </div>
             </div>
 
-    );
-}
+            <div className="panel-body bio-graph-info">
+              <h3>Round details</h3>
+              <div className="row">
+                <ul className="main__list">
+                  <li className="main__list-item">
+                    <div>
+                      <p className="main__list-content">Center Point</p>
+                    </div>
+                  </li>
+                  {company.driveDetails.map((drive, key) => (
+                    <li className="main__list-item" key={key}>
+                      <div className="main__list-content-wrap">
+                        <p className="main__list-content">{drive.activity}</p>
+                        <p className="main__list-sub gray">
+                          Round No: {drive.roundNo}
+                        </p>
+                        <p className="main__list-sub gray">
+                          Date: {drive.date}
+                        </p>
+                        <p className="main__list-sub gray">
+                          Time: {drive.time}
+                        </p>
+                        <p className="main__list-sub gray">
+                          Venue: {drive.venue}
+                        </p>
+                        <br />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="panel-body  bio-graph-info">
+              <h3>Skills required</h3>
+              <div className="row companySkillBody">
+                <div>
+                  {company.skillsRequired.map((skill, key) => (
+                    <div key={key}>
+                      <i className="bi bi-arrow-right-circle"></i> {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="panel-body  bio-graph-info">
+              <h3>Apply</h3>
+              <div className="row companySkillBody">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="exampleInputEmail1" className="form-label">
+                      Select resume
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="exampleInputEmail1"
+                      accept=".pdf"
+                      onChange={handleChangeFile}
+                      aria-describedby="emailHelp"
+                    />
+                    <div id="emailHelp" className="form-text">
+                      Select only if, you have other than default resume
+                    </div>
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Apply
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default CompanyDetails;

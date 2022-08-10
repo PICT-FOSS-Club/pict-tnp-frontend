@@ -26,10 +26,10 @@ const StudentCompanyTable = () => {
             "newPassword": newPass
         }, { withCredentials: true });
 
-        if (res.status === 200 || res.status === 201) {
+        if (res.status === 200) {
             return navigate("/student/dashboard");
             // console.log('sucessful login')
-        }else {
+        } else {
             return alert("Old Password did not matched");
         }
         //navigate the user to signin page:
@@ -38,9 +38,9 @@ const StudentCompanyTable = () => {
 
     return (
         <div>
-                 <div id="signInForm">
-            <main className="form-signin w-100 m-auto">
-                <form onSubmit={handleSubmit} >
+            <div id="signInForm">
+                <main className="form-signin w-100 m-auto">
+                    <form onSubmit={handleSubmit} >
                         <h3>Update Password</h3>
                         <div className="form-group mt-3">
                             <label>
@@ -82,9 +82,9 @@ const StudentCompanyTable = () => {
                                 Submit
                             </button>
                         </div>
-                </form>
+                    </form>
                 </main>
-                </div>
+            </div>
         </div>
     )
 }

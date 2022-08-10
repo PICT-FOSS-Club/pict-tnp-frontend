@@ -6,15 +6,26 @@ import axios from 'axios';
 const StudentCompanyTable = () => {
 
     const [studentCompanyTable, setStudentCompanyTable] = useState([]);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         axios.get("http://localhost:8080/student/company/drive", { withCredentials: true }).then((res) => {
-            console.log('res', res.data.data);
+            // console.log('res', res.data.data);
             setStudentCompanyTable(res.data.data)
+            setLoading(false);
         }).catch((err) => {
             console.log('err', err)
+            setLoading(false);
         })
     }, [])
+
+    if (isLoading) {
+        return <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>;
+    }
 
 
     return (
@@ -42,7 +53,7 @@ const StudentCompanyTable = () => {
                             <td>{studentCompany.name}</td>
                             <td>{studentCompany.profile}</td>
                             <td><span className={`badge px-3 ${studentCompany.currentRound >= studentCompany.totalRounds ? "bg-danger" : !studentCompany.currentRound ? "bg-primary" : "bg-success"} `}>{(studentCompany.currentRound >= studentCompany.totalRounds) ? "Complete" : (!studentCompany.currentRound) ? "Upcoming" : `Round - ${studentCompany.currentRound}`}</span></td>
-                            <td>{studentCompany.currentRound >= studentCompany.totalRounds ? "Completed" : !studentCompany.currentRound ? studentCompany.driveDetails[0].date : studentCompany.driveDetails[studentCompany.currentRound + 1].date}</td>
+                            <td>{studentCompany.currentRound >= studentCompany.totalRounds ? "Completed" : !studentCompany.currentRound ? studentCompany.driveDetails[0].date : studentCompany.driveDetails[studentCompany.currentRound].date}</td>
                             <td><Link to={`/student/company/details/${studentCompany._id}`}>View</Link></td>
                         </tr>
                     ))}
