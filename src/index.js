@@ -5,11 +5,15 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 
+// import { ToastProvider } from "react-toast-notifications";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CookiesProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+
   </CookiesProvider>
 );

@@ -26,40 +26,59 @@ import StudentFilter from "./pages/admin/StudentFilterTable";
 import PlacedStudentTable from "./pages/admin/PlacedStudentTable";
 import RequireAuth from "./authentication/RequireAuth";
 import Unauthorized from "./pages/Unauthorized";
+import CompanyForm from "./pages/admin/CompanyForm";
 
 function App() {
-
   return (
     <div>
       <Routes>
         <Route index path="*" element={<LoginForm />} />
         <Route path="team" element={<Team />} />
         <Route path="password/forgot" element={<ForgotPassword />} />
-        <Route path="admin/password/reset/:token/:id" element={<AdminResetPassword />} />
+        <Route
+          path="admin/password/reset/:token/:id"
+          element={<AdminResetPassword />}
+        />
 
-        <Route  >
+        <Route element={<RequireAuth allowedRoles="admin" />}>
           <Route path="admin" element={<AdminSidebar />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="student-table" element={<AdminStudentTable />} />
             <Route path="placedStudents" element={<PlacedStudentTable />} />
             <Route path="student-filter" element={<StudentFilter />} />
             <Route path="company-table" element={<AdminCompanyTable />} />
-            <Route path="student/profile/:studentId" element={<AdminStudentDetails />} />
-            <Route path="company/details/:companyId" element={<AdminCompanyDetails />} />
-            <Route path="student-round-table" element={<AdminStudentRoundTable />} />
+            <Route path="add-company" element={<CompanyForm />} />
+            <Route
+              path="student/profile/:studentId"
+              element={<AdminStudentDetails />}
+            />
+            <Route
+              path="company/details/:companyId"
+              element={<AdminCompanyDetails />}
+            />
+            <Route
+              path="student-round-table"
+              element={<AdminStudentRoundTable />}
+            />
             <Route path="password/update" element={<AdminUpdatePassword />} />
           </Route>
         </Route>
 
-        <Route path="student/password/reset/:token/:id" element={<StudentResetPassword />} />
-        
-        <Route  >
+        <Route
+          path="student/password/reset/:token/:id"
+          element={<StudentResetPassword />}
+        />
+
+        <Route element={<RequireAuth allowedRoles="student" />}>
           <Route path="student" element={<StudentSidebar />}>
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="profile" element={<StudentProfile />} />
             <Route path="password/update" element={<StudentUpdatePassword />} />
             <Route path="company-table" element={<StudentCompanyTable />} />
-            <Route path="company/details/:companyId" element={<CompanyDetails />} />
+            <Route
+              path="company/details/:companyId"
+              element={<CompanyDetails />}
+            />
           </Route>
         </Route>
 

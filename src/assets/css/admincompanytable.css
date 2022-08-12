@@ -53,3 +53,7 @@
 .table>tbody{
     background-color: white;
 }
+
+#companyFormadd .col-md-5, #companyFormadd .col-md-10, #companyFormadd .col-md-3, #companyFormadd .col-md-4,#companyFormadd .col-md-2{
+    margin: 10px;
+}

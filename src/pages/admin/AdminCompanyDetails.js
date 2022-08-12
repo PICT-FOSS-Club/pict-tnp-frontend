@@ -22,7 +22,11 @@ const AdminCompanyDetails = () => {
     }, []);
 
     if (isLoading) {
-        return <div className="App">Loading...</div>;
+        return <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>;
     }
 
     const handleClick = async (e) => {

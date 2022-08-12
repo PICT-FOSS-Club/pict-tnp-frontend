@@ -155,6 +155,7 @@ body {
 .bio-row p span {
     width: 100px;
     display: inline-block;
+    font-weight: bold;
 }
 
 .bio-chart, .bio-desk {

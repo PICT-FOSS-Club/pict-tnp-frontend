@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../assets/css/studentprofile.css";
 import { useParams, useNavigate } from "react-router-dom";
+// import { useToasts } from "react-toast-notifications";
 
 const CompanyDetails = () => {
   const params = useParams();
@@ -10,6 +11,7 @@ const CompanyDetails = () => {
   const [resume, setResume] = useState(null);
 
   const navigate = useNavigate();
+  // const { addToast } = useToasts(); //react toast notifications:
 
   useEffect(() => {
     axios
@@ -29,12 +31,14 @@ const CompanyDetails = () => {
   }, [params.companyId]);
 
   if (isLoading) {
-    return <div className="text-center">
-    <div className="spinner-border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </div>
-  </div>;
-}
+    return (
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   const handleChangeFile = (e) => {
     setResume(e.target.files[0]);
@@ -54,7 +58,9 @@ const CompanyDetails = () => {
         .then((res) => {
           console.log("First ", res);
           if (res.status == 403) {
-            return alert("You are not eligible Apply to this Company!");
+            return alert(
+              "Oops! Please make sure you are eligible to apply for this company!"
+            );
           }
           //
           const formData = new FormData();
@@ -81,7 +87,9 @@ const CompanyDetails = () => {
         .catch((err) => {
           console.log("Error", err);
           if (err.request.status == 403) {
-            return alert("You are not eligible Apply to this Company!");
+            return alert(
+              "Oops! Please make sure you are eligible to apply for this company!"
+            );
           }
           // console.log("Error while applying to company.");
         });

@@ -101,7 +101,7 @@ const AdminCompanyTable = () => {
                         <div id="emailHelp" className="form-text">Enter the name of company</div>
                     </div>
                     <div className="col-md-3"> 
-                    <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddCompanyForm"><i className="bi bi-plus-circle"></i> Add a Company</button>
+                    <Link to='/admin/add-company'><button className="btn btn-primary"><i className="bi bi-plus-circle"></i> Add a Company</button></Link>
                     </div>
                 </div>
             </div>
