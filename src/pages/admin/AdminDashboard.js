@@ -3,6 +3,8 @@ import axios from "axios";
 import "../../assets/css/style.css"
 import "../../assets/css/studentdashboardhome.css"
 import { Link } from "react-router-dom";
+import BranchPieChart from "./charts/BranchPiChart";
+import BarChart from "./charts/BarChart";
 
 export default function AdminDashboard() {
 
@@ -95,6 +97,16 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+        <hr />
+        <div className="row">
+          <div className="col-md-4">
+          <BranchPieChart />
+          </div>
+          <div className="col-md-8">
+            <BarChart />
+          </div>
+        </div>
+        
       </div>
     </div>
   );
