@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import "../../assets/css/admincompanytable.css";
+import PdfGenerator from "./pdf/PdfGenerator";
 
 const PlacedStudentTable = () => {
   const [studentTable, setStudentTable] = useState([]);
@@ -233,6 +234,10 @@ const PlacedStudentTable = () => {
         filename={'Course-[ '+(course.pg ? 'PG ': '')+(course.ug ? 'UG': '')+ ' ] Branch-[ ' +(branch.cs ? 'CS ': '')+(branch.it ? 'IT ': '')+(branch.entc ? 'ENTC ': '')+'] - '+'Placed Students'}
         sheet="tablexlsx"
         buttonText="Download Excel"/>
+
+        <button className="btn btn-secondary mx-2" onClick={()=>{PdfGenerator(studentTable)}}>
+          Download PDF
+        </button>
 
       <table id="table-to-xls" className="table table-hover">
         <thead className="table-dark darkRow">
