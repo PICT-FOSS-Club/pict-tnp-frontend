@@ -69,6 +69,7 @@ export default function AdminDashboard() {
             </div>
             </Link>
           </div><div className="col-md-4 my-5">
+          <Link to="/admin/placedStudents" style={{textDecoration:"none",color:"#565656"}}>
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">Placed students</h5>
@@ -81,6 +82,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
+            </Link>
           </div>
           <div className="col-md-4 my-5">
             <div className="card text-center">

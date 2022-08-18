@@ -27,6 +27,8 @@ import PlacedStudentTable from "./pages/admin/PlacedStudentTable";
 import RequireAuth from "./authentication/RequireAuth";
 import Unauthorized from "./pages/Unauthorized";
 import CompanyForm from "./pages/admin/CompanyForm";
+import BasicForm from "./pages/admin/addCompany/BasicForm";
+import AddJobOpen from "./pages/admin/addCompany/AddJobOpen";
 
 function App() {
   return (
@@ -47,7 +49,7 @@ function App() {
             <Route path="placedStudents" element={<PlacedStudentTable />} />
             <Route path="student-filter" element={<StudentFilter />} />
             <Route path="company-table" element={<AdminCompanyTable />} />
-            <Route path="add-company" element={<CompanyForm />} />
+            <Route path="add-company" element={<BasicForm />} />
             <Route
               path="student/profile/:studentId"
               element={<AdminStudentDetails />}
