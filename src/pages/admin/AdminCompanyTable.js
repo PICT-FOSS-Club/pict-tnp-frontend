@@ -71,9 +71,9 @@ const AdminCompanyTable = () => {
         }
 
     useEffect(() => {
-        axios.get("http://localhost:8080/admin/company/all", { withCredentials: true })
+        axios.get("http://localhost:8080/admin/company/jobs", { withCredentials: true })
             .then((res) => {
-                // console.log(res);
+                console.log(res.data.data);
                 setCompanyTable(res.data.data);
                 setLoading(false);
             }).catch((err) => {
@@ -81,6 +81,11 @@ const AdminCompanyTable = () => {
                 setLoading(false);
             })
     }, [])
+
+    const handleClick = async (e) => {
+        e.preventDefault();
+        navigate("/admin/add-job", { state: {companyId: e.target.value}});
+    }
 
     if (isLoading) {
         return <div className="text-center">
@@ -92,7 +97,7 @@ const AdminCompanyTable = () => {
 
     return (
         <div id="adminCOmpanyTable">
-                    <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Company table</h3></div>
+                    <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Company records</h3></div>
             <div className="row my-3">
                 <div className="d-flex justify-content-between">
                     <div className="filter col-md-3">
@@ -105,50 +110,17 @@ const AdminCompanyTable = () => {
                     </div>
                 </div>
             </div>
-            <table className="table table-hover">
+            {/* <table className="table table-hover">
                 <thead className="table-dark darkRow">
                     <tr>
                         <th scope="col">Company name</th>
                         <th scope="col">Job</th>
                         <th scope="col">Round</th>
                         <th scope="col" className='text-center'>Update</th>
-                        {/* <th scope="col">Schedule</th> */}
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* <tr>
-                        <td>Deutch Back</td>
-                        <td>Software Development</td>
-                        <td><span className="badge px-3 bg-success">Round - 5</span></td>
-                        <td className="td">
-                            <form>
-                                <div className="myFlex">
-                                    <input className="my-input mx-1 mx-1 mx-1 form-control form-control-sm" id="formFileSm" type="file" />
-                                    <button type="submit" className="myBtn btn btn-primary">Update</button>
-                                </div>
-                            </form>
-                        </td>
-                        <td>25/11/2022</td>
-                        <td><a href="#">View</a></td>
-                    </tr> */}
-                    {/* {companyTable.map((company, key) => (
-                        <tr key={key}>
-                            <td>{company.name}</td>
-                            <td>{company.profile}</td>
-                            <td><span className={`badge px-3 ${company.currentRound === company.totalRounds ? "bg-danger" : !company.currentRound ? "bg-primary" : "bg-success" } `}>{ (company.currentRound === company.totalRounds) ? "Complete" : (!company.currentRound) ? "Upcoming" : `Round - ${company.currentRound}` }</span></td>
-                            <td className="td">
-                                <form>
-                                    <div className="myFlex">
-                                        <input className="my-input mx-1 mx-1 mx-1 form-control form-control-sm" type="file" onChange={handleFile}/>
-                                        <button type="submit" className="myBtn btn btn-primary" onClick={handleSubmit} value={company._id}>Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                            {/* <td>{company.currentRound >= company.totalRounds ? "Completed" : !company.currentRound ? company.driveDetails[0].date : company.driveDetails[company.currentRound + 1].date }</td> 
-                            <td><Link to={`/admin/company/details/${company._id}`}>View</Link></td>
-                        </tr>
-                    ))} */}
                     {companyTable.filter(company => company.name.toLowerCase().includes(searchQuery.toLowerCase())).map((company => (
               
                         <tr key={company.name}>
@@ -163,13 +135,35 @@ const AdminCompanyTable = () => {
                                 </div>
                             </form>
                         </td>
-                        {/* <td>{company.currentRound >= company.totalRounds ? "Completed" : !company.currentRound ? company.driveDetails[0].date : company.driveDetails[company.currentRound + 1].date }</td> */}
+                       
                         <td><Link to={`/admin/company/details/${company._id}`}>View</Link></td>
                     </tr>
                    )))}
 
                 </tbody>
-            </table>
+            </table> */}
+            <div className="row" style={{width:"94%"}}>
+
+                {companyTable.filter(company => company.name.toLowerCase().includes(searchQuery.toLowerCase())).map((company=>(
+                            <div key={company.name} className="col-md-5 m-3">
+                <div className="card">
+                    <div className="card-header">
+                        <h5>{company.name}</h5>
+                    </div>
+                    <div className="card-body">
+                       <p className="card-text" style={{fontSize:"15px"}}><i><ol>
+                        {company.jobDescriptions.length ? company.jobDescriptions.map((desc=>(
+                            <li>{desc.name} : round - {desc.currentRound} <i className="bi bi-arrow-right"></i> <a href="#">Link</a></li>
+                        ))) : "No job opening record available"}
+                        </ol></i>
+                        </p>
+                        <hr />
+                        <button className="btn btn-primary" onClick={handleClick} value={company._id} style={{float:"right"}}>Add job opening</button>
+                    </div>
+                    </div>
+                    </div>
+                )))}
+            </div>
             <AddCompanyForm />
             </div>
     )

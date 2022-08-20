@@ -1,14 +1,19 @@
 import { useState } from "react";
 import "../../../assets/css/admincompanytable.css";
 import "../../../assets/css/studentprofile.css"
+import { Link, useLocation } from 'react-router-dom';
 
 const AddJobOpen = () => {
+
+    const location = useLocation();
+    const state = location.state;
+    console.log(state.companyId);
     const [company, setCompany] = useState({
         ctc: "",
-        profile: "",
+        name: "",
         totalRounds: "",
         currentRound: 0,
-        startDate: "",
+        // startDate: "",
         endDate: "",
         criteria: {
           branch: {

@@ -50,6 +50,7 @@ function App() {
             <Route path="student-filter" element={<StudentFilter />} />
             <Route path="company-table" element={<AdminCompanyTable />} />
             <Route path="add-company" element={<BasicForm />} />
+            <Route path="add-job" element={<AddJobOpen />} />
             <Route
               path="student/profile/:studentId"
               element={<AdminStudentDetails />}

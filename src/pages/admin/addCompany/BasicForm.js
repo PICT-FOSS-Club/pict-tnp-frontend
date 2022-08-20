@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../../assets/css/admincompanytable.css";
 import "../../../assets/css/studentprofile.css"
-
+import axios from "axios";
 const BasicForm = () => {
 
     const [company, setCompany] = useState({
@@ -11,10 +11,24 @@ const BasicForm = () => {
         companyLocation: "",
       });
 
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        await axios.post('http://localhost:8080/company/add', company,{withCredentials:true})
+        .then((res)=>{
+          console.log("Res: ",res);
+          alert("Company added successfully!");
+          window.location.reload();
+        })
+        .catch((err)=>{
+          console.log("err: ",err);
+        })
+      }
+
     return ( 
         <div id="adminCOmpanyTable">
              <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Fill the company details</h3></div>
-             <form>
+             <form onSubmit={handleSubmit}>
               <p style={{ fontSize: "15px" }}>
                 <span style={{ color: "red" }}>*</span> All fields are mandatory
               </p>
