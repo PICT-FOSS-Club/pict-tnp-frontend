@@ -158,7 +158,7 @@ const AdminCompanyTable = () => {
                         </ol></i>
                         </p>
                         <hr />
-                        <button className="btn btn-primary" onClick={handleClick} value={company._id} style={{float:"right"}}>Add job opening</button>
+                        <button className="btn btn-primary" onClick={(e)=>{e.preventDefault(); navigate("/admin/add-job", { state: {companyId: company._id, companyName: company.name}})}} value={company._id} style={{float:"right"}}>Add job opening</button>
                     </div>
                     </div>
                     </div>

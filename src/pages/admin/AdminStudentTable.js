@@ -144,7 +144,7 @@ const AdminStudentTable = () => {
                         <td onClick={(e) => { 
                             e.preventDefault();
                             navigate("/admin/student/profile", { state: {studentId: student._id}}); 
-                        }}>View</td>
+                        }}><a href='#'>View</a></td>
                     </tr>
                     ))}
                 </tbody>

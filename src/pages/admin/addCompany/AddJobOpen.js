@@ -18,7 +18,12 @@ const AddJobOpen = () => {
         // startDate: "",
         endDate: "27-08-2022",
         criteria: {
-          branch: {
+          ug: {
+            cs: false,
+            it: false,
+            entc: false,
+          },
+          pg: {
             cs: false,
             it: false,
             entc: false,
@@ -38,7 +43,13 @@ const AddJobOpen = () => {
 
 
         // Making a state specifically for branches:
-  const [branch, setBranch] = useState({
+  const [ug, setug] = useState({
+    cs: false,
+    it: false,
+    entc: false,
+  });
+
+  const [pg, setpg] = useState({
     cs: false,
     it: false,
     entc: false,
@@ -160,7 +171,7 @@ const AddJobOpen = () => {
       }
     return ( 
         <div id="adminCOmpanyTable">
-             <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>PhonePe - Add new job opening</h3></div>
+             <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>{state.companyName} - Add new job opening</h3></div>
              <form onSubmit={handleSubmit}>
               <p style={{ fontSize: "15px" }}>
                 <span style={{ color: "red" }}>*</span> All fields are mandatory
@@ -223,24 +234,24 @@ const AddJobOpen = () => {
 
                 <div className="col-md-4">
                   <label htmlFor="branch" className="form-label">
-                    Branch<span style={{ color: "red" }}>*</span>
+                   UG Branch<span style={{ color: "red" }}>*</span>
                   </label>
                   {/* Comp */}
                   <div>
                   <div className="form-check form-switch">
                     <input
-                      checked={branch.cs}
+                      checked={ug.cs}
                       onChange={() => {
-                        setBranch({ ...branch, cs: !branch.cs }); //setting the branch
+                        setug({ ...ug, cs: !ug.cs }); //setting the branch
 
                         //setting the company
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            branch: {
-                              ...branch,
-                              cs: !branch.cs,
+                            ug: {
+                              ...ug,
+                              cs: !ug.cs,
                             },
                           },
                         });
@@ -257,18 +268,18 @@ const AddJobOpen = () => {
                     {/* It */}
                     <div className="form-check form-switch">
                     <input
-                      checked={branch.it}
+                      checked={ug.it}
                       onChange={() => {
-                        setBranch({ ...branch, it: !branch.it }); //setting the branch
+                        setug({ ...ug, it: !ug.it }); //setting the branch
 
                         //setting the company
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            branch: {
-                              ...branch,
-                              it: !branch.it,
+                            ug: {
+                              ...ug,
+                              it: !ug.it,
                             },
                           },
                         });
@@ -285,18 +296,18 @@ const AddJobOpen = () => {
                     {/* Entc */}
                     <div className="form-check form-switch">
                     <input
-                      checked={branch.entc}
+                      checked={ug.entc}
                       onChange={() => {
-                        setBranch({ ...branch, entc: !branch.entc }); //setting the branch
+                        setug({ ...ug, entc: !ug.entc }); //setting the branch
 
                         //setting the company
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            branch: {
-                              ...branch,
-                              entc: !branch.entc,
+                            ug: {
+                              ...ug,
+                              entc: !ug.entc,
                             },
                           },
                         });
@@ -315,62 +326,91 @@ const AddJobOpen = () => {
 
                 <div className="col-md-3">
                   <label htmlFor="g" className="form-label">
-                    Graduation<span style={{ color: "red" }}>*</span>
+                    PG Branch<span style={{ color: "red" }}>*</span>
                   </label>
                   <div>
                   <div className="form-check form-switch">
                     <input
-                      checked={grad.ug}
+                      checked={pg.cs}
                       onChange={() => {
-                        setGrad({ ...grad, ug: !grad.ug }); //setting the branch
+                        setpg({ ...pg, cs: !pg.cs }); //setting the branch
 
                         //setting the company
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            courseName: {
-                              ...grad,
-                              ug: !grad.ug,
+                            pg: {
+                              ...pg,
+                              cs: !pg.cs,
                             },
                           },
                         });
                       }}
                       type="checkbox"
-                      value="ug"
-                      name="ug"
-                      role="switch"
                       className="form-check-input"
-                      id="ug"
-                    />
-                    <label htmlFor="ug"> UG</label>
+                      role="switch"
+                      value="Computer Engineering"
+                      name="comp"
+                      id="pgcomp"
+                    />{" "}
+                    <label htmlFor="pgcomp"> Computer Engineering</label>
                     </div>
+                    {/* It */}
                     <div className="form-check form-switch">
                     <input
-                      checked={grad.pg}
+                      checked={pg.it}
                       onChange={() => {
-                        setGrad({ ...grad, pg: !grad.pg }); //setting the branch
+                        setpg({ ...pg, it: !pg.it }); //setting the branch
 
                         //setting the company
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            courseName: {
-                              ...grad,
-                              pg: !grad.pg,
+                            pg: {
+                              ...pg,
+                              it: !pg.it,
                             },
                           },
                         });
                       }}
                       type="checkbox"
-                      value="pg"
-                      name="pg"
+                      value="IT"
                       role="switch"
                       className="form-check-input"
-                      id="pg"
-                    />
-                    <label htmlFor="pg"> PG</label>
+                      name="IT"
+                      id="pgIT"
+                    />{" "}
+                    <label htmlFor="pgIT"> Infomation Technology</label>
+                    </div>
+                    {/* Entc */}
+                    <div className="form-check form-switch">
+                    <input
+                      checked={pg.entc}
+                      onChange={() => {
+                        setpg({ ...pg, entc: !pg.entc }); //setting the branch
+
+                        //setting the company
+                        setCompany({
+                          ...company,
+                          criteria: {
+                            ...company.criteria,
+                            pg: {
+                              ...pg,
+                              entc: !pg.entc,
+                            },
+                          },
+                        });
+                      }}
+                      type="checkbox"
+                      value="E&TC"
+                      name="etc"
+                      role="switch"
+                      className="form-check-input"
+                      id="pgetc"
+                    />{" "}
+                    <label htmlFor="pgetc"> E&TC</label> 
                     </div>
                   </div>
                 </div>
@@ -659,7 +699,7 @@ const AddJobOpen = () => {
                     </div>
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a className="dropdown-item">
                     <div className="form-check form-switch">
                       <input
@@ -688,7 +728,7 @@ const AddJobOpen = () => {
                       </label>
                     </div>
                   </a>
-                </li>
+                </li> */}
               </ul>
                   </span> 
                 </h5>
@@ -771,7 +811,7 @@ const AddJobOpen = () => {
                  </div>
 
 
-                <div id="gapinput" style={{display:"none"}} className="col-md-4">
+                {/* <div id="gapinput" style={{display:"none"}} className="col-md-4">
                 <div className="col-md-10">
                   <label htmlFor="amcat" className="form-label">
                     Year gap <i>(Kindly check the option where year gap is not allowed)</i>
@@ -825,7 +865,7 @@ const AddJobOpen = () => {
                     </div>
                   </div>
                 </div>
-                </div>
+                </div> */}
 
                 
 

@@ -23,6 +23,7 @@ const AdminStudentDetails = () => {
             })
             .catch((err) => {
                 console.log('Error in get req:', err);
+                setLoading(false);
             })
     }, []);
 
@@ -46,7 +47,7 @@ const AdminStudentDetails = () => {
                         </div>
                         <div className="panel-body bio-graph-info">
                             <h3>Applied Companies Status</h3>
-                            {student.appliedCompanies.reverse().map((company, key) => (
+                            {/* {student.appliedCompanies.map((company, key) => (
                                 <div className="companyRoundDetails" key={key}>
                                 <div className="card my-3">
                                     <div className="card-body">
@@ -60,7 +61,7 @@ const AdminStudentDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                            ))}
+                            ))} */}
                         </div>
                         {/* {student.appliedCompanies.map((company, key) => (
                             <div className="companyRoundDetails" key={key}>
@@ -298,7 +299,7 @@ const AdminStudentDetails = () => {
                                 </div>
                                 <div className="bio-row">
                                     <p>
-                                        <span>Appeared for AMCAT: </span> {student.appearedForAmcat}
+                                        <span>Appeared for AMCAT: </span> {student.AmcatScore ? "Yes" : "No"}
                                     </p>
                                 </div>
                             </div>
