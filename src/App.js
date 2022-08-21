@@ -51,10 +51,7 @@ function App() {
             <Route path="company-table" element={<AdminCompanyTable />} />
             <Route path="add-company" element={<BasicForm />} />
             <Route path="add-job" element={<AddJobOpen />} />
-            <Route
-              path="student/profile/:studentId"
-              element={<AdminStudentDetails />}
-            />
+            <Route path="student/profile" element={<AdminStudentDetails />}/>
             <Route
               path="company/details/:companyId"
               element={<AdminCompanyDetails />}

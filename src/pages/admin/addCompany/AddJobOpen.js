@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../../assets/css/admincompanytable.css";
 import "../../../assets/css/studentprofile.css"
 import { Link, useLocation } from 'react-router-dom';
+import axios from "axios";
 
 const AddJobOpen = () => {
 
@@ -9,12 +10,13 @@ const AddJobOpen = () => {
     const state = location.state;
     console.log(state.companyId);
     const [company, setCompany] = useState({
+        companyId: state.companyId,
         ctc: "",
         name: "",
-        totalRounds: "",
+        totalRounds: "3",
         currentRound: 0,
         // startDate: "",
-        endDate: "",
+        endDate: "27-08-2022",
         criteria: {
           branch: {
             cs: false,
@@ -31,8 +33,9 @@ const AddJobOpen = () => {
           },
         },
         skillsRequired: [],
-        driveDetails: [],
+        roundDetails: [],
       });
+
 
         // Making a state specifically for branches:
   const [branch, setBranch] = useState({
@@ -96,6 +99,7 @@ const AddJobOpen = () => {
         const list = [...skills];
         list[index][name] = value;
         setSkill(list);
+        setCompany({...company,skillsRequired:list});
       };
      
       // handle click event of the Remove button
@@ -103,12 +107,13 @@ const AddJobOpen = () => {
         const list = [...skills];
         list.splice(index, 1);
         setSkill(list);
+        setCompany({...company,skillsRequired:list});
       };
      
       // handle click event of the Add button
       const handleSkillAddClick = () => {
         setSkill([...skills, { skill:"" }]);
-        console.log(skills);
+        // console.log(skills);
       };
 
     // handle input change
@@ -117,6 +122,8 @@ const AddJobOpen = () => {
         const list = [...drive];
         list[index][name] = value;
         setDrive(list);
+        var lislen = list.length;
+        setCompany({...company,roundDetails:list,totalRounds:lislen,endDate:list[lislen-1].date});
       };
      
       // handle click event of the Remove button
@@ -124,6 +131,8 @@ const AddJobOpen = () => {
         const list = [...drive];
         list.splice(index, 1);
         setDrive(list);
+        var lislen = list.length;
+        setCompany({...company,roundDetails:list,totalRounds:lislen,endDate:list[lislen-1].date});
       };
      
       // handle click event of the Add button
@@ -133,12 +142,26 @@ const AddJobOpen = () => {
         venue: "",
         date: "",
         time: "" }]);
-        console.log(drive);
+        // console.log(drive);
       };
+
+      const handleSubmit = async(e) =>{
+        e.preventDefault();
+
+        await axios.post('http://localhost:8080/company/job/add', company, {withCredentials: true})
+        .then((res)=>{
+          console.log("Res: ",res);
+          alert("New job opening added successfully!");
+          window.location.reload();
+        })
+        .catch((err)=>{
+          console.log("err: ",err);
+        })
+      }
     return ( 
         <div id="adminCOmpanyTable">
              <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>PhonePe - Add new job opening</h3></div>
-             <form>
+             <form onSubmit={handleSubmit}>
               <p style={{ fontSize: "15px" }}>
                 <span style={{ color: "red" }}>*</span> All fields are mandatory
               </p>
@@ -161,13 +184,13 @@ const AddJobOpen = () => {
             <div className="row">
                 <div className="col-md-6">
                     <input className="form-control"
-                    name="profile"
-                    value={company.profile}
-                    onChange={(e)=>{setCompany({...company,profile: e.target.value})}}
+                    name="name"
+                    value={company.name}
+                    onChange={(e)=>{setCompany({...company,name: e.target.value})}}
                     placeholder="Job description"
                     />
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                     <input className="form-control"
                     name="ctc"
                     value={company.ctc}
@@ -683,7 +706,7 @@ const AddJobOpen = () => {
                       placeholder="Attendance percentage"
                       id="attend"
                       aria-describedby="inputGroupPrepend"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -704,7 +727,7 @@ const AddJobOpen = () => {
                       placeholder="Active backlog"
                       id="alog"
                       aria-describedby="inputGroupPrepend"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -721,7 +744,7 @@ const AddJobOpen = () => {
                       placeholder="Passive backlog"
                       id="plog"
                       aria-describedby="inputGroupPrepend"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -741,7 +764,7 @@ const AddJobOpen = () => {
                       placeholder="AMCAT percentage"
                       id="amcat"
                       aria-describedby="inputGroupPrepend"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -912,6 +935,12 @@ const AddJobOpen = () => {
             
                   </div>
                 </div>
+             </div>
+             <div className="form-check mx-3 my-2">
+                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" required />
+                <label className="form-check-label" htmlFor="flexCheckDefault">
+                  Are you sure to add the new job opening?
+                </label>
              </div>
              <hr className="my-2" />
              <div className="col-md-12 mx-3 my-2">

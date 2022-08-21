@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import "../../assets/css/studentprofile.css"
@@ -11,8 +11,11 @@ const AdminStudentDetails = () => {
     const [isLoading, setLoading] = useState(true);
     const [student, setStudent] = useState({});
 
+    const location = useLocation();
+    const state = location.state;
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/admin/student/profile/${params.studentId}`, { withCredentials: true })
+        axios.get(`http://localhost:8080/admin/student/profile/${state.studentId}`, {withCredentials: true})
             .then((res) => {
                 console.log('After get request:', res.data);
                 setStudent(res.data.data);

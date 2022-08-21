@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as XLSX from 'xlsx'
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "../../assets/css/admincompanytable.css";
 
 
@@ -17,6 +17,8 @@ const AdminStudentTable = () => {
     // on change states
     const [excelFile, setExcelFile] = useState(null);
     const [excelFileError, setExcelFileError] = useState(null);
+
+    const navigate = useNavigate();
 
     // handle File
     const fileType = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
@@ -139,7 +141,10 @@ const AdminStudentTable = () => {
                         <td>{(student.isGT20 || student.isLTE20) ? "Yes" : "No"}</td>
                         <td>{(student.isGT20) ? "Yes" : "No"}</td>
                         <td>{(student.isLTE20) ? "Yes" : "No"}</td>
-                        <td><Link to={`/admin/student/profile/${student._id}`}>View</Link></td>
+                        <td onClick={(e) => { 
+                            e.preventDefault();
+                            navigate("/admin/student/profile", { state: {studentId: student._id}}); 
+                        }}>View</td>
                     </tr>
                     ))}
                 </tbody>

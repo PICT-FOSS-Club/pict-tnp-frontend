@@ -21,26 +21,26 @@ export default function AdminSidebar() {
 
   
   
-setInterval(()=>{
-  var initial_url = window.location.href;
-  var url = initial_url .split( '/' );
+// setInterval(()=>{
+//   var initial_url = window.location.href;
+//   var url = initial_url .split( '/' );
 
-  var path = url[url.length-1];
-  if(path=='dashboard'){
-    setActive({...active,dash:'active',company:'',student:'',changePass:'',placeStudent:''});
-  }else if(path=='student-table'){
-    setActive({...active,dash:'',company:'',student:'active',changePass:'',placeStudent:''});
-  }else if(path=='company-table'){
-    setActive({...active,dash:'',company:'active',student:'',changePass:'',placeStudent:''});
-  }else if(path=='update'){
-    setActive({...active,dash:'',company:'',student:'',changePass:'active',placeStudent:''});
-  }else if(path=='placedStudents'){
-    setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:'active'})
-  }else{
-    setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:''})
-  }
+//   var path = url[url.length-1];
+//   if(path=='dashboard'){
+//     setActive({...active,dash:'active',company:'',student:'',changePass:'',placeStudent:''});
+//   }else if(path=='student-table'){
+//     setActive({...active,dash:'',company:'',student:'active',changePass:'',placeStudent:''});
+//   }else if(path=='company-table'){
+//     setActive({...active,dash:'',company:'active',student:'',changePass:'',placeStudent:''});
+//   }else if(path=='update'){
+//     setActive({...active,dash:'',company:'',student:'',changePass:'active',placeStudent:''});
+//   }else if(path=='placedStudents'){
+//     setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:'active'})
+//   }else{
+//     setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:''})
+//   }
 
-},10)
+// },10)
 
   const handleSignOut = () => {
     axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true})

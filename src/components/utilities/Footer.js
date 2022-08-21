@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/css/style.css";
 import {Link} from "react-router-dom";
+import pictfossclublogo from "../../assets/img/pictfossclublogo.png";
 
 export default function Footer() {
   return (
@@ -15,7 +16,7 @@ export default function Footer() {
             </li>
             <li className="nav-item">
               <a href="https://pict-foss-club.github.io/" className="nav-link px-2 text-muted">
-                PICT FOSS CLUB
+                <img src={pictfossclublogo} style={{width:"22px"}} alt="PICT FOSS CLUB" /> PICT FOSS CLUB
               </a>
             </li>
             <li className="nav-item">

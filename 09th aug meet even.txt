@@ -17,10 +17,10 @@ cgpa aggre.
 
 Engineering cgpa while adding company
 }
-//kedar and gaurav
+//kedar and gaurav  -> done
 
 $Adding pdf while adding company
-//rohit
+//rohit -> done in backend
 
 @Adding logo in copyright 
 
@@ -34,8 +34,10 @@ $Generating report
 @Placement report generation automatically ChartJS
 1. PiChart - branchwise
 2. Graphs
+->done in frontend
 
 @Form for adding company
+->done in frontend
 //sangmeshwar
 
 //12 Aug, fri
@@ -43,14 +45,7 @@ $Generating report
 
 Adding criterion for documents
 
-
-
-
-
-
 Validation of name and all fields
-
-
 
 Image of student 
 //upload when login
