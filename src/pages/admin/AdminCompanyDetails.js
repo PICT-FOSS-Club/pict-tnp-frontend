@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import "../../assets/css/studentprofile.css"
 
 const AdminCompanyDetails = () => {
@@ -8,9 +8,12 @@ const AdminCompanyDetails = () => {
     const [isLoading, setLoading] = useState(true);
     const [company, setCompany] = useState({});
     const navigate = useNavigate();
+    const location = useLocation();
+    const state = location.state;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/admin/company/details/${params.companyId}`, { withCredentials: true })
+        console.log(state.jobId);
+    axios.get(`http://localhost:8080/company/job/details/${state.jobId}`, { withCredentials: true })
             .then((res) => {
                 console.log('After get request:', res.data.data);
                 setCompany(res.data.data);
@@ -42,8 +45,8 @@ const AdminCompanyDetails = () => {
                     </div>
                     <div className="panel">
                         <div className="bio-graph-heading">
-                            <h1>{company.name}</h1>
-                            <span>{company.profile}</span>
+                            <h1>{company.company[0].name}</h1>
+                            <span>{company.name}</span>
                             <p>₹ {company.ctc} LPA</p>
                         </div>
                         <div className="panel-body bio-graph-info">
@@ -58,18 +61,18 @@ const AdminCompanyDetails = () => {
                                 </div> */}
                                 <div className='companyROInfo'>
                                     <b> Branch:    </b>
-                                    {company.criteria.branch.cs ? "CE" : ""} {company.criteria.branch.it ? ", IT" : ""} {company.criteria.branch.entc ? "and E&TC" : ""} ({company.criteria.courseName.ug ? "UG" : ""} {company.criteria.courseName.pg ? ", PG" : ""})
+                                    {/* {company.criteria.branch.cs ? "CE" : ""} {company.criteria.branch.it ? ", IT" : ""} {company.criteria.branch.entc ? "and E&TC" : ""} ({company.criteria.courseName.ug ? "UG" : ""} {company.criteria.courseName.pg ? ", PG" : ""}) */}
                                 </div>
                                 <div className='companyROInfo'>
                                     <b>Minimum CGPA Criteria:  </b>
-                                    {company.criteria.cgpa}
+                                    {company.criteria.aggrCgpa}
                                 </div>
                                 <div className='companyROInfo'>
                                     <b>Email:  </b>
-                                    {company.email}
+                                    {company.company[0].email}
                                 </div>
                                 <div className='companyROInfo'>
-                                    <b>Website:  </b><a href={`http://${company.websiteUrl}`}><i className="bi bi-globe"></i></a>
+                                    <b>Website:  </b><a href={`http://${company.company[0].websiteUrl}`}><i className="bi bi-globe"></i></a>
 
                                 </div>
                             </div>
@@ -81,7 +84,7 @@ const AdminCompanyDetails = () => {
                             </div>
 
                             <div className="row">
-                                {company.driveDetails.map((round, key)=> (
+                                {company.roundDetails.map((round, key)=> (
                                     <div className="alert my-2 roundDetails alert-secondary" role="alert" key={key}>
                                         <h6> Round {round.roundNo} ({round.activity})</h6>
                                         <div className="options">
@@ -181,7 +184,7 @@ const AdminCompanyDetails = () => {
                             <h3>Skills required</h3>
                             <div className="row companySkillBody">
                                 <div>
-                                    {company.skillsRequired.map((skill, key) => <div key={key}><i className="bi bi-arrow-right-circle"></i> {skill}</div>)}
+                                    {company.skillsRequired.map((skill, key) => <div key={key}><i className="bi bi-arrow-right-circle"></i> {skill.skill}</div>)}
                                 </div>
                             </div>
                         </div>
@@ -227,6 +230,7 @@ const AdminCompanyDetails = () => {
             </div>
 
         </div>
+       
     );
 }
 

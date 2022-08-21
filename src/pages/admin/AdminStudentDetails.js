@@ -47,6 +47,32 @@ const AdminStudentDetails = () => {
                         </div>
                         <div className="panel-body bio-graph-info">
                             <h3>Applied Companies Status</h3>
+                            {student.applications.length 
+                            
+                            ? 
+                            
+                            student.applications.map((company, key) => (
+                                <div className="companyRoundDetails" key={key}>
+                                <div className="card my-3">
+                                    <div className="card-body">
+                                        <Link to={`/admin/company/details/${company.companyId}`}> {company.name} </Link>
+                                        {(company.roundCleared === 0 && company.result) ? 
+                                        (<button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>) : 
+                                        ((company.result) ? 
+                                            (<button type="button" className={`btn ${company.totalRounds === company.roundCleared ? 'btn-sucess' : 'btn-primary'}`} data-tooltip={`${company.totalRounds === company.roundCleared ? 'Selected' : 'Cleared'}`}>Round {`${company.roundCleared}`}</button>) : 
+                                            (<button type="button" className="btn btn-danger" data-tooltip="Uncleared">Round {`${company.roundCleared+1}`}</button>)
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            )) 
+
+
+
+                            : <p className='m-3'>No application available</p>
+
+                            }
+
                             {/* {student.appliedCompanies.map((company, key) => (
                                 <div className="companyRoundDetails" key={key}>
                                 <div className="card my-3">

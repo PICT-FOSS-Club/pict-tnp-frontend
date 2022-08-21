@@ -153,7 +153,7 @@ body {
 }
 
 .bio-row p span {
-    width: 100px;
+    /* width: 100px; */
     display: inline-block;
     font-weight: bold;
 }
@@ -735,4 +735,10 @@ ul.summary-list > li:last-child  {
   .companyRoundDetails:hover{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     border-radius: 10px;
+  }
+
+
+ .student .row .bio-row p{
+    display: flex;
+    justify-content: space-between;
   }

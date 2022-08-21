@@ -53,7 +53,7 @@ function App() {
             <Route path="add-job" element={<AddJobOpen />} />
             <Route path="student/profile" element={<AdminStudentDetails />}/>
             <Route
-              path="company/details/:companyId"
+              path="company/details"
               element={<AdminCompanyDetails />}
             />
             <Route

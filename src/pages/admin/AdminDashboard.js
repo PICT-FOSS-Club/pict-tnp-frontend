@@ -102,7 +102,7 @@ export default function AdminDashboard() {
         <hr />
         <div className="row">
           <div className="col-md-4">
-          <BranchPieChart />
+          <BranchPieChart csPlacedStudents={dashboardDetials.csPlacedStudents} itPlacedStudents={dashboardDetials.itPlacedStudents} entcPlacedStudents={dashboardDetials.entcPlacedStudents} />
           </div>
           <div className="col-md-8">
             <BarChart />

@@ -153,7 +153,7 @@ const AdminCompanyTable = () => {
                     <div className="card-body">
                        <p className="card-text" style={{fontSize:"15px"}}><i><ol>
                         {company.jobDescriptions.length ? company.jobDescriptions.map((desc=>(
-                            <li>{desc.name} : round - {desc.currentRound} <i className="bi bi-arrow-right"></i> <a href="#">Link</a></li>
+                            <li>{desc.name} : round - {desc.currentRound} <i className="bi bi-arrow-right"></i> <Link to="#" onClick={(e)=>{e.preventDefault(); navigate("/admin/company/details", {state: {jobId: desc._id}})}}>Link</Link></li>
                         ))) : "No job opening record available"}
                         </ol></i>
                         </p>

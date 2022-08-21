@@ -9,7 +9,7 @@ const StudentCompanyTable = () => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/student/company/drive", { withCredentials: true }).then((res) => {
+        axios.get("http://localhost:8080/student/company/jobs", { withCredentials: true }).then((res) => {
             // console.log('res', res.data.data);
             setStudentCompanyTable(res.data.data)
             setLoading(false);

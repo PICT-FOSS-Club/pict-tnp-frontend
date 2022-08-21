@@ -3,12 +3,13 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
+const BranchPieChart = (props) => {
+  const data = {
     labels: ['CE', 'IT', 'EnTC'],
     datasets: [
       {
         label: '# of placed',
-        data: [32, 19, 3],
+        data: [props.csPlacedStudents, props.itPlacedStudents, props.entcPlacedStudents],
         backgroundColor: [
           'rgba(153,153,153, 0.2)',
           'rgba(209,209,209, 0.2)',
@@ -23,7 +24,8 @@ export const data = {
       },
     ],
   };
-  export const options = {
+
+  const options = {
     responsive: true,
     plugins: {
       legend: {
@@ -35,7 +37,7 @@ export const data = {
       },
     },
   };
-const BranchPieChart = () => {
+
     return ( 
         <Pie data={data} options={options}/>
      );
