@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "../../../assets/css/admincompanytable.css";
 import "../../../assets/css/studentprofile.css"
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+
 
 const AddJobOpen = () => {
 
     const location = useLocation();
+    const navigate = useNavigate();
+
     const state = location.state;
     console.log(state.companyId);
     const [company, setCompany] = useState({
@@ -29,9 +32,13 @@ const AddJobOpen = () => {
             entc: false,
           },
           gender: { male: false, female: false, both: false },
-          cgpa: "",
+          aggrCgpa: "",
           sscPercentage: "",
           hscPercentage: "",
+          activeBacklog: 0,
+          passiveBacklog: 0,
+          amcatScore: 0,
+          attendance: 0,
           courseName: {
             ug: false,
             pg: false,
@@ -132,6 +139,7 @@ const AddJobOpen = () => {
         const { name, value } = e.target;
         const list = [...drive];
         list[index][name] = value;
+        list[index]["roundNo"] = index + 1;
         setDrive(list);
         var lislen = list.length;
         setCompany({...company,roundDetails:list,totalRounds:lislen,endDate:list[lislen-1].date});
@@ -163,7 +171,8 @@ const AddJobOpen = () => {
         .then((res)=>{
           console.log("Res: ",res);
           alert("New job opening added successfully!");
-          window.location.reload();
+          // window.location.reload();
+          navigate('/admin/company-table');
         })
         .catch((err)=>{
           console.log("err: ",err);
@@ -580,13 +589,13 @@ const AddJobOpen = () => {
                   </label>
                   <div className="input-group has-validation">
                     <input
-                      value={company.criteria.cgpa}
+                      value={company.criteria.aggrCgpa}
                       onChange={(e) =>
                         setCompany({
                           ...company,
                           criteria: {
                             ...company.criteria,
-                            cgpa: e.target.value,
+                            aggrCgpa: e.target.value,
                           },
                         })
                       }
@@ -746,7 +755,8 @@ const AddJobOpen = () => {
                       placeholder="Attendance percentage"
                       id="attend"
                       aria-describedby="inputGroupPrepend"
-                      
+                      value={company.criteria.attendance}
+                      onChange={(e)=>{setCompany({...company,criteria:{...company.criteria, attendance:e.target.value}})}}
                     />
                   </div>
                 </div>
@@ -767,7 +777,8 @@ const AddJobOpen = () => {
                       placeholder="Active backlog"
                       id="alog"
                       aria-describedby="inputGroupPrepend"
-                      
+                      value={company.criteria.activeBacklog}
+                      onChange={(e)=>{setCompany({...company,criteria:{...company.criteria,activeBacklog:e.target.value}})}}
                     />
                   </div>
                 </div>
@@ -784,7 +795,8 @@ const AddJobOpen = () => {
                       placeholder="Passive backlog"
                       id="plog"
                       aria-describedby="inputGroupPrepend"
-                      
+                      value={company.criteria.passiveBacklog}
+                      onChange={(e)=>setCompany({...company,criteria:{...company.criteria,passiveBacklog:e.target.value}})}
                     />
                   </div>
                 </div>
@@ -804,7 +816,8 @@ const AddJobOpen = () => {
                       placeholder="AMCAT percentage"
                       id="amcat"
                       aria-describedby="inputGroupPrepend"
-                      
+                      value={company.criteria.amcatScore}
+                      onChange={(e)=>{setCompany({...company,criteria:{...company.criteria,amcatScore:e.target.value}})}}
                     />
                   </div>
                 </div>
