@@ -17,7 +17,7 @@ const StudentCompanyTable = () => {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log('res', res.data.data);
+        console.log('res', res.data.data);
         setStudentCompanyTable(res.data.data);
         setLoading(false);
       })
@@ -85,10 +85,10 @@ const StudentCompanyTable = () => {
                               {desc.currentRound}{" "}
                               <i className="bi bi-arrow-right"></i>{" "}
                               <Link
-                                to="#"
+                                to="/student/company/details"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  navigate("/admin/company/details", {
+                                  navigate("/student/company/details", {
                                     state: { jobId: desc._id },
                                   });
                                 }}

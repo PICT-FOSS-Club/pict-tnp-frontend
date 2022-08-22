@@ -233,7 +233,7 @@ const StudentProfile = () => {
                 </div>
                 <div className="bio-row">
                   <p>
-                    <span>Appeared for AMCAT: </span> {student.appearedForAmcat}
+                    <span>Amcat Score: </span> {student.amcatScore}
                   </p>
                 </div>
               </div>

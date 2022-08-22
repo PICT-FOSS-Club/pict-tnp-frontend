@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../assets/css/studentdashboardhome.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function StudentDashboard() {
-  const [student, setStudent] = useState([]);
+  const [appliedCompanies, setAppliedCompanies] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:8080/student/me", { withCredentials: true })
+      .get("http://localhost:8080/student/company/job/applied", { withCredentials: true })
       .then((res) => {
-        console.log("After get request:", res.data.student);
-        setStudent(res.data.student);
+        console.log("After get request:", res.data.data);
+        setAppliedCompanies(res.data.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -40,52 +40,52 @@ export default function StudentDashboard() {
 
       <div className="row">
         {/* if no companies applied */}
-        {student.appliedCompanies
-          ? student.appliedCompanies.map((company, key) => {
+        {appliedCompanies
+          ? appliedCompanies.map((application, key) => {
               return (
                 <div className="col-md-4 my-5" key={key}>
                   <div className="card text-center">
                     <div className="card-body">
-                      <h5 className="card-title">{company.name}</h5>
-                      <p className="card-text"></p>
+                      <h4 className="card-title">{application.job[0].company[0].name}</h4>
+                      <h6 className="card-title">{application.job[0].name}</h6>
                       <button
                         className={`btn ${
-                          company.totalRounds <= company.roundCleared
+                          application.job[0].totalRounds <= application.studentRoundCleared
                             ? "btn-success"
-                            : company.roundCleared > 0 && company.result
+                            : application.studentRoundCleared > 0 && application.studentResult
                             ? "btn-primary"
-                            : company.roundCleared > 0 && !company.result
+                            : application.studentRoundCleared > 0 && !application.studentResult
                             ? "btn-danger"
                             : "btn-secondary"
                         }`}
                         data-tooltip={`${
-                          company.totalRounds <= company.roundCleared
+                          application.job[0].totalRounds <= application.roundCleared
                             ? "Placed"
-                            : !company.result
+                            : !application.studentResult
                             ? "Unplaced"
-                            : !company.roundCleared && company.result
+                            : !application.studentRoundCleared && application.studentResult
                             ? "Applied"
-                            : `${company.roundCleared} Cleared`
+                            : `${application.studentRoundCleared} Cleared`
                         } `}
                       >
-                        {!company.roundCleared && company.result === true
+                        {!application.studentRoundCleared && application.studentResult === true
                           ? "Upcoming"
-                          : company.roundCleared >= company.totalRounds
+                          : application.studentRoundCleared >= application.job[0].totalRounds
                           ? "Placed"
-                          : !company.result
-                          ? `Round ${company.roundCleared} Uncleared`
-                          : `Round ${company.roundCleared} cleared`}
+                          : !application.studentResult
+                          ? `Round ${application.studentRoundCleared} Uncleared`
+                          : `Round ${application.studentRoundCleared} cleared`}
                       </button>
                     </div>
                     <div className="card-footer text-muted">
-                      {company.totalRounds === company.roundCleared
+                      {application.totalRounds === application.studentRoundCleared
                         ? "Selected"
-                        : company.roundCleared > 0 && !company.result
+                        : application.studentRoundCleared > 0 && !application.studentResult
                         ? "Not selected"
-                        : `Next : Round ${company.roundCleared + 1}`}{" "}
+                        : `Next : Round ${application.studentRoundCleared + 1}`}{" "}
                       -{" "}
                       <Link
-                        to={`/student/company/details/${company.companyId}`}
+                        to={"/student/company/details"} onClick={(e)=>{ e.preventDefault(); navigate("/student/company/details", { state: { jobId: application.job[0]._id}})}}
                       >
                         {" "}
                         See schedule{" "}
