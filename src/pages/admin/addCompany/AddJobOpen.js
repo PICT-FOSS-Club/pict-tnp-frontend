@@ -88,7 +88,8 @@ const AddJobOpen = () => {
       activity: "",
       venue: "",
       date: "",
-      time: ""}]);
+      time: ""
+    }]);
  
   // handle input change
   const handleInputChange = (e, index) => {
@@ -142,7 +143,7 @@ const AddJobOpen = () => {
         list[index]["roundNo"] = index + 1;
         setDrive(list);
         var lislen = list.length;
-        setCompany({...company,roundDetails:list,totalRounds:lislen,endDate:list[lislen-1].date});
+        setCompany({...company,roundDetails:list,totalRounds:lislen});
       };
      
       // handle click event of the Remove button
@@ -151,7 +152,7 @@ const AddJobOpen = () => {
         list.splice(index, 1);
         setDrive(list);
         var lislen = list.length;
-        setCompany({...company,roundDetails:list,totalRounds:lislen,endDate:list[lislen-1].date});
+        setCompany({...company,roundDetails:list,totalRounds:lislen});
       };
      
       // handle click event of the Add button
@@ -160,7 +161,8 @@ const AddJobOpen = () => {
         activity: "",
         venue: "",
         date: "",
-        time: "" }]);
+        time: ""
+       }]);
         // console.log(drive);
       };
 
@@ -235,6 +237,30 @@ const AddJobOpen = () => {
                   <div className="col-md-4">
                   <button type="button" className="btn btn-primary">Upload</button>
                   </div>
+                  </div>
+                </div>
+
+                <div className="col-md-3">
+                  <label htmlFor="12per" className="form-label">
+                    Registration end date and time
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <div className="input-group has-validation">
+                    <input
+                    type="datetime-local"
+                      value={company.endDate}
+                      onChange={(e) =>
+                        setCompany({
+                          ...company,
+                          endDate:e.target.value
+                        })
+                      }
+                      className="form-control"
+                      placeholder="12th percentage"
+                      id="12per"
+                      aria-describedby="inputGroupPrepend"
+                      required
+                    />
                   </div>
                 </div>
 
