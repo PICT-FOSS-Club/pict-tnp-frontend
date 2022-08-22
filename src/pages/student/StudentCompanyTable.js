@@ -1,68 +1,114 @@
-import React, { useEffect, useState } from 'react';
-import {Link } from 'react-router-dom';
-import "../../assets/css/admincompanytable.css"
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../../assets/css/admincompanytable.css";
+import axios from "axios";
 
 const StudentCompanyTable = () => {
+  const [studentCompanyTable, setStudentCompanyTable] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-    const [studentCompanyTable, setStudentCompanyTable] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    useEffect(() => {
-        axios.get("http://localhost:8080/student/company/jobs", { withCredentials: true }).then((res) => {
-            // console.log('res', res.data.data);
-            setStudentCompanyTable(res.data.data)
-            setLoading(false);
-        }).catch((err) => {
-            console.log('err', err)
-            setLoading(false);
-        })
-    }, [])
+  const navigate = useNavigate();
 
-    if (isLoading) {
-        return <div className="text-center">
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/student/company/jobs", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        // console.log('res', res.data.data);
+        setStudentCompanyTable(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
-      </div>;
-    }
+      </div>
+    );
+  }
 
-
-    return (
-        <div id="adminCOmpanyTable">
-            <div className="row my-3">
-                <div className="d-flex justify-content-between">
-                    <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Company table</h3></div>
-                    <div className="col-md-3" />
-                    <div className="col-md-1" />
-                </div>
+  return (
+    <div id="adminCOmpanyTable">
+      <div className="col-md-6 col-sm-6 cl-sx-6 col-6">
+        <h3>Company records</h3>
+      </div>
+      <div className="row my-3">
+        <div className="d-flex justify-content-between">
+          <div className="filter col-md-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Search company
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="search for..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" className="form-text">
+              Enter the name of company
             </div>
-            <table className="table table-hover">
-                <thead className="table-dark darkRow">
-                    <tr>
-                        <th scope="col" >Company name</th>
-                        <th scope="col" >Job</th>
-                        <th scope="col" className="text-center">Round</th>
-                        <th scope="col" >Schedule</th>
-                        <th scope="col" >Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {studentCompanyTable.map((studentCompany) => (
-                        <tr key={studentCompany._id}>
-                            <td>{studentCompany.name}</td>
-                            <td>{studentCompany.profile}</td>
-                            <td><span className={`badge px-3 ${studentCompany.currentRound >= studentCompany.totalRounds ? "bg-danger" : !studentCompany.currentRound ? "bg-primary" : "bg-success"} `}>{(studentCompany.currentRound >= studentCompany.totalRounds) ? "Complete" : (!studentCompany.currentRound) ? "Upcoming" : `Round - ${studentCompany.currentRound}`}</span></td>
-                            <td>{studentCompany.currentRound >= studentCompany.totalRounds ? "Completed" : !studentCompany.currentRound ? studentCompany.driveDetails[0].date : studentCompany.driveDetails[studentCompany.currentRound].date}</td>
-                            <td><Link to={`/student/company/details/${studentCompany._id}`}>View</Link></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div />
+          </div>
         </div>
-    )
-}
+      </div>
 
-export default StudentCompanyTable   
+      {studentCompanyTable
+        .filter((company) =>
+          company.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map((company) => (
+          <div key={company.name} className="col-md-5 m-3">
+            <div className="card">
+              <div className="card-header">
+                <h5>{company.name}</h5>
+              </div>
+              <div className="card-body">
+                <p className="card-text" style={{ fontSize: "15px" }}>
+                  <i>
+                    <ol>
+                      {company.jobDescriptions.length
+                        ? company.jobDescriptions.map((desc, key) => (
+                            <li key={key}>
+                              {desc.name} (₹ {desc.ctc} LPA) : round -{" "}
+                              {desc.currentRound}{" "}
+                              <i className="bi bi-arrow-right"></i>{" "}
+                              <Link
+                                to="#"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  navigate("/admin/company/details", {
+                                    state: { jobId: desc._id },
+                                  });
+                                }}
+                              >
+                                Link
+                              </Link>
+                            </li>
+                          ))
+                        : "No job opening record available"}
+                    </ol>
+                  </i>
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+
+      <div />
+    </div>
+  );
+};
+
+export default StudentCompanyTable;

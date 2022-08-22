@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../assets/css/studentprofile.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 // import { useToasts } from "react-toast-notifications";
 
 const CompanyDetails = () => {
@@ -13,12 +13,15 @@ const CompanyDetails = () => {
   const navigate = useNavigate();
   // const { addToast } = useToasts(); //react toast notifications:
 
+  const location = useLocation();
+
+  const state = location.state;
+
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8080/student/company/details/${params.companyId}`,
-        { withCredentials: true }
-      )
+      .get(`http://localhost:8080/company/job/details/${state.jobId}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log("After get request:", res.data.data);
         setCompany(res.data.data);
