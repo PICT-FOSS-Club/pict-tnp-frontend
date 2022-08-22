@@ -7,6 +7,7 @@ import "../../assets/css/admincompanytable.css";
 
 
 const AdminStudentRoundTable = () => {
+    axios.defaults.withCredentials = true
 
     const [studentTable, setStudentTable] = useState([]);
 
@@ -21,7 +22,8 @@ const AdminStudentRoundTable = () => {
     
     useEffect(() => {
         setLoading(false);
-        axios.get(`http://localhost:8080/admin/company/${state.listType}/${state.roundNo}/${state.companyId}`, { withCredentials: true })
+        console.log(state.jobId, state.roundNo);
+        axios.get(`http://localhost:8080/admin/company/${state.listType}`, { jobId: state.jobId, roundNo: parseInt(state.roundNo) })
             .then((res) => {
                 console.log('res', res.data.studentList);
                 setStudentTable(res.data.studentList);
