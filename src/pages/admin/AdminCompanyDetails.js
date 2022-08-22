@@ -95,7 +95,7 @@ const AdminCompanyDetails = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        navigate("/admin/student-round-table", { state: {companyId: company._id, companyName: company.name, roundNo:e.target.id, listType: e.target.value}});
+        navigate("/admin/student-round-table", { state: {jobId: company._id, companyName: company.name, roundNo:e.target.id, listType: e.target.value}});
     }
 
     return (
