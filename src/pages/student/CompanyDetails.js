@@ -17,9 +17,9 @@ const CompanyDetails = () => {
 
   const state = location.state;
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/company/job/details/${state.jobId}`, {
+  useEffect(async () => {
+    await axios
+      .get(`http://localhost:8080/student/job/details/${state.jobId}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -31,7 +31,7 @@ const CompanyDetails = () => {
         console.log("Error in get req:", err);
         setLoading(false);
       });
-  }, [params.companyId]);
+  }, []);
 
   if (isLoading) {
     return (

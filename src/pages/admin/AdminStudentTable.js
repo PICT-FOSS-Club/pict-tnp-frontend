@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as XLSX from 'xlsx'
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../../assets/css/admincompanytable.css";
 
 
@@ -58,15 +58,15 @@ const AdminStudentTable = () => {
             const json = JSON.stringify(data);
             setLoading(true);
             console.log(json)
-            axios.post('http://localhost:8080/admin/register/students',data , {withCredentials: true})
-            .then(function (res) {
-                console.log(res);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-                setLoading(false);
-            });
+            axios.post('http://localhost:8080/admin/register/students', data, { withCredentials: true })
+                .then(function (res) {
+                    console.log(res);
+                    setLoading(false);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    setLoading(false);
+                });
         }
     }
 
@@ -85,15 +85,15 @@ const AdminStudentTable = () => {
 
     if (isLoading) {
         return <div className="text-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>;
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>;
     }
 
     return (
         <div id="adminCOmpanyTable">
-                    <div className="col-md-4 col-sm-4 col-sx-4 col-4"><h3>Student table</h3></div>
+            <div className="col-md-4 col-sm-4 col-sx-4 col-4"><h3>Student table</h3></div>
             <div className="row my-3">
                 <div className="d-flex justify-content-between">
 
@@ -106,8 +106,8 @@ const AdminStudentTable = () => {
                     <form className="col-md-5" onSubmit={handleSubmit}>
                         <div className="myFlex">
                             <div>
-                            <label htmlFor="formFileSm" className="form-label">Upload Students</label>
-                            <input className="form-control" id="formFileSm" type="file" onChange={handleFile} required />
+                                <label htmlFor="formFileSm" className="form-label">Upload Students</label>
+                                <input className="form-control" id="formFileSm" type="file" onChange={handleFile} required />
                             </div>
                             <button type="submit" className="myBtn mx-1 btn btn-primary">Upload</button>
                         </div>
@@ -137,15 +137,15 @@ const AdminStudentTable = () => {
 
                     {studentTable.filter(student => student.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || student.aadharCard.toString().includes(searchQuery) || student.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || student.email.includes(searchQuery) || student.phone.toString().includes(searchQuery) || student.pictRegistrationId.includes(searchQuery) || student.rollNumber.toString().includes(searchQuery)).map((student) => (
                         <tr key={student.pictRegistrationId}>
-                        <td>{student.firstName} {student.middleName} {student.lastName}</td>
-                        <td>{(student.isGT20 || student.isLTE20) ? "Yes" : "No"}</td>
-                        <td>{(student.isGT20) ? "Yes" : "No"}</td>
-                        <td>{(student.isLTE20) ? "Yes" : "No"}</td>
-                        <td onClick={(e) => { 
-                            e.preventDefault();
-                            navigate("/admin/student/profile", { state: {studentId: student._id}}); 
-                        }}><a href='#'>View</a></td>
-                    </tr>
+                            <td>{student.firstName} {student.middleName} {student.lastName}</td>
+                            <td>{(student.isGT20 || student.isLTE20) ? "Yes" : "No"}</td>
+                            <td>{(student.isGT20) ? "Yes" : "No"}</td>
+                            <td>{(student.isLTE20) ? "Yes" : "No"}</td>
+                            <td onClick={(e) => {
+                                e.preventDefault();
+                                navigate("/admin/student/profile", { state: { studentId: student._id } });
+                            }}><Link to='#'>View</Link></td>
+                        </tr>
                     ))}
                 </tbody>
             </table>
