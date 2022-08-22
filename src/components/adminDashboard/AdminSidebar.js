@@ -9,56 +9,63 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies();
 
-  const [active,setActive] = useState({
+  const [active, setActive] = useState({
     dash: 'active',
     company: '',
     student: '',
     changePass: '',
-    placeStudent: ''
+    placeStudent: '',
+    report: ''
   })
 
 
+  function setActiveTag() {
+    var initial_url = window.location.href;
+    var url = initial_url.split('/');
 
-  
-  
-// setInterval(()=>{
-//   var initial_url = window.location.href;
-//   var url = initial_url .split( '/' );
+    var path = url[url.length - 1];
+    if (path == 'dashboard') {
+      setActive({ ...active, dash: 'active', company: '', student: '', changePass: '', placeStudent: '', report: '' });
+    } else if (path == 'student-table') {
+      setActive({ ...active, dash: '', company: '', student: 'active', changePass: '', placeStudent: '', report: '' });
+    } else if (path == 'company-table') {
+      setActive({ ...active, dash: '', company: 'active', student: '', changePass: '', placeStudent: '', report: '' });
+    } else if (path == 'update') {
+      setActive({ ...active, dash: '', company: '', student: '', changePass: 'active', placeStudent: '', report: '' });
+    } else if (path == 'placedStudents') {
+      setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: 'active', report: '' });
+    } else if (path == 'generate-report') {
+      setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: '', report: 'active' });
+    } else {
+      setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: '', report: '' })
+    }
+  }
 
-//   var path = url[url.length-1];
-//   if(path=='dashboard'){
-//     setActive({...active,dash:'active',company:'',student:'',changePass:'',placeStudent:''});
-//   }else if(path=='student-table'){
-//     setActive({...active,dash:'',company:'',student:'active',changePass:'',placeStudent:''});
-//   }else if(path=='company-table'){
-//     setActive({...active,dash:'',company:'active',student:'',changePass:'',placeStudent:''});
-//   }else if(path=='update'){
-//     setActive({...active,dash:'',company:'',student:'',changePass:'active',placeStudent:''});
-//   }else if(path=='placedStudents'){
-//     setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:'active'})
-//   }else{
-//     setActive({...active,dash:'',company:'',student:'',changePass:'',placeStudent:''})
-//   }
 
-// },10)
+
+
+
+  // setInterval(() => {
+  //   setActiveTag();
+  // }, 10)
 
   const handleSignOut = () => {
-    axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true})
-    .then(res => {
-      console.log("Admin Logout");
-      setCookie("usertype", "", { path: "/" });
-      setCookie("token1", "", { path: "/" });
-      setCookie("username", "", { path: "/" });
-      navigate("/");
-    })
-    .catch(err => {
-      console.log("Error ",err);
-    })
+    axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true })
+      .then(res => {
+        console.log("Admin Logout");
+        setCookie("usertype", "", { path: "/" });
+        setCookie("token1", "", { path: "/" });
+        setCookie("username", "", { path: "/" });
+        navigate("/");
+      })
+      .catch(err => {
+        console.log("Error ", err);
+      })
   }
 
   return (
     <div>
-      <header style={{marginTop:"-60px"}} className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <header style={{ marginTop: "-60px" }} className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <Link className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" to="/admin/dashboard">
           PICT TnP Platform
         </Link>
@@ -66,7 +73,7 @@ export default function AdminSidebar() {
           Hello, Admin!
         </div>
         <button
-        id="navBarBtn"
+          id="navBarBtn"
           className="navbar-toggler position-absolute d-md-none collapsed"
           type="button"
           data-bs-toggle="collapse"
@@ -127,6 +134,16 @@ export default function AdminSidebar() {
                       Company
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className={`nav-link ${active.report}`} to="/admin/generate-report">
+                      <span
+                        data-feather="shopping-cart"
+                        className="align-text-bottom"
+                      ></span>
+                      <i class="bi bi-clipboard2-data"></i>
+                      Generate Report
+                    </Link>
+                  </li>
                 </ul>
 
                 <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
@@ -168,9 +185,9 @@ export default function AdminSidebar() {
             </nav>
 
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Dashboard</h1>
-                </div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Dashboard</h1>
+              </div>
             </main>
 
           </div>

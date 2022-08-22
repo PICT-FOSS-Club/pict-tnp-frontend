@@ -481,7 +481,7 @@ const AddCompanyForm = () => {
                       id="genderOption1"
                       value={gender.male}
                     />
-                    <label className="form-check-label" for="genderOption1">
+                    <label className="form-check-label" htmlFor="genderOption1">
                       Male
                     </label>
                   </div>
@@ -514,7 +514,7 @@ const AddCompanyForm = () => {
                       id="genderOption2"
                       value={gender.female}
                     />
-                    <label className="form-check-label" for="genderOption2">
+                    <label className="form-check-label" htmlFor="genderOption2">
                       Female
                     </label>
                   </div>
@@ -547,7 +547,7 @@ const AddCompanyForm = () => {
                       id="genderOption3"
                       value={gender.both}
                     />
-                    <label className="form-check-label" for="genderOption3">
+                    <label className="form-check-label" htmlFor="genderOption3">
                       Both
                     </label>
                   </div>

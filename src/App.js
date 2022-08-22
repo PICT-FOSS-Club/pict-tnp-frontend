@@ -29,6 +29,7 @@ import Unauthorized from "./pages/Unauthorized";
 import CompanyForm from "./pages/admin/CompanyForm";
 import BasicForm from "./pages/admin/addCompany/BasicForm";
 import AddJobOpen from "./pages/admin/addCompany/AddJobOpen";
+import GenerateReport from "./pages/admin/GenerateReport";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="company-table" element={<AdminCompanyTable />} />
             <Route path="add-company" element={<BasicForm />} />
             <Route path="add-job" element={<AddJobOpen />} />
+            <Route path="generate-report" element={<GenerateReport />} />
             <Route path="student/profile" element={<AdminStudentDetails />} />
             <Route path="company/details" element={<AdminCompanyDetails />} />
             <Route

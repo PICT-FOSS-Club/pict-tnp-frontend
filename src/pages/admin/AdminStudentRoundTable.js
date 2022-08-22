@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as XLSX from 'xlsx'
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import "../../assets/css/admincompanytable.css";
 
@@ -19,6 +19,7 @@ const AdminStudentRoundTable = () => {
     const location = useLocation();
 
     const state = location.state;
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(false);
@@ -70,11 +71,14 @@ const AdminStudentRoundTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {studentTable.filter(student => student.studentName.toLowerCase().includes(searchQuery.toLowerCase())).map((student, key) => (
+                    {studentTable.filter(student => student.middleName.toLowerCase().includes(searchQuery.toLowerCase()) || student.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || student.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || student.aadharCard.toString().includes(searchQuery) || student.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || student.email.includes(searchQuery) || student.phone.toString().includes(searchQuery) || student.pictRegistrationId.includes(searchQuery) || student.rollNumber.toString().includes(searchQuery)).map((student, key) => (
                         <tr key={key}>
-                            <td>{student.studentName}</td>
-                            <td>{student.studentEmail}</td>
-                            <td><Link to={`/admin/student/profile/${student.studentId}`}>View</Link></td>
+                            <td>{student.firstName} {student.middleName} {student.lastName}</td>
+                            <td>{student.email}</td>
+                            <td onClick={(e) => {
+                                e.preventDefault();
+                                navigate("/admin/student/profile", { state: { studentId: student._id } });
+                            }}><Link to='#'>View</Link></td>
                         </tr>
                     ))}
                 </tbody>
