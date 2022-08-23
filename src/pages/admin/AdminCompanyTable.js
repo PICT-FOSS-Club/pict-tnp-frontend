@@ -25,7 +25,7 @@ const AdminCompanyTable = () => {
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile) {
-      console.log(selectedFile.type);
+      // console.log(selectedFile.type);
       if (selectedFile && fileType.includes(selectedFile.type)) {
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
@@ -38,7 +38,7 @@ const AdminCompanyTable = () => {
         setExcelFile(null);
       }
     } else {
-      console.log("plz select your file");
+      // console.log("plz select your file");
     }
   };
 
@@ -50,13 +50,13 @@ const AdminCompanyTable = () => {
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      console.log(data);
+      // console.log(data);
       const json = JSON.stringify(data);
-      console.log(e.target.value);
+      // console.log(e.target.value);
       // setCompanyId(e.target.value);
-      console.log(json);
+      // console.log(json);
       const result = { companyId: e.target.value, qualifiedStudents: data };
-      console.log(result);
+      // console.log(result);
       axios
         .post("http://localhost:8080/company/round/result", result, {
           withCredentials: true,
@@ -65,10 +65,10 @@ const AdminCompanyTable = () => {
           alert("Compnay round updated");
           // navigate("/")
           window.location.reload();
-          console.log(res);
+          // console.log(res);
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };

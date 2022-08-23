@@ -163,7 +163,7 @@ function ReportTable(props) {
     );
 
     const data = props.reportData;
-    console.log(props.reportData);
+    // console.log(props.reportData);
 
     return (
         <Styles>

@@ -31,11 +31,11 @@ const PlacedStudentTable = () => {
       })
       .then((res) => {
         setStudentTable(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         setLoading(false);
       });
   }, []);
@@ -215,7 +215,7 @@ const PlacedStudentTable = () => {
               </ul>
             </div>
           </div>
-          <div className="col-md-4 mx-3">
+          {/* <div className="col-md-4 mx-3">
             <select className="form-select" aria-label="Default select example">
               <option disabled selected>
                 Select particular company
@@ -223,7 +223,7 @@ const PlacedStudentTable = () => {
               <option value="PhonePe">PhonePe</option>
               <option value="Zomato">Zomato</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
 

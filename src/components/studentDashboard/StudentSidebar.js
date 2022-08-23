@@ -18,7 +18,7 @@ export default function StudentSidebar() {
       navigate("/");
     })
     .catch(err => {
-      console.log("Error ",err);
+      // console.log("Error ",err);
     })
   }
 

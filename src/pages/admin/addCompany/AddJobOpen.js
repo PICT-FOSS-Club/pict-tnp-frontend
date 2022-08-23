@@ -11,7 +11,7 @@ const AddJobOpen = () => {
   const navigate = useNavigate();
 
   const state = location.state;
-  console.log(state.companyId);
+  // console.log(state.companyId);
   const [company, setCompany] = useState({
     companyId: state.companyId,
     ctc: "",
@@ -110,7 +110,7 @@ const AddJobOpen = () => {
   // handle click event of the Add button
   const handleAddClick = () => {
     setJDInputList([...JDinputList, { jobDes: "", ctc: "" }]);
-    console.log(JDinputList);
+    // console.log(JDinputList);
   };
 
   // handle input change
@@ -175,7 +175,7 @@ const AddJobOpen = () => {
     if (jobFile) {
       await axios.post('http://localhost:8080/company/job/add', company, { withCredentials: true })
         .then(async (res) => {
-          console.log("Res: ", res.data.data);
+          // console.log("Res: ", res.data.data);
           let formData = new FormData();;
           formData.append("job-file", jobFile)
           await axios.post(`http://localhost:8080/job/files/${res.data.data.companyId}/${res.data.data._id}`, formData, { withCredentials: true, headers: { "content-type": "multipart/form-data" } })
@@ -187,7 +187,7 @@ const AddJobOpen = () => {
           navigate('/admin/company-table');
         })
         .catch((err) => {
-          console.log("err: ", err);
+          // console.log("err: ", err);
         })
     } else {
       alert("Kindly select job description file!");
@@ -269,7 +269,7 @@ const AddJobOpen = () => {
                     ...company,
                     endDate: e.target.value,
                   });
-                  console.log("Moment: ", moment(e.target.value).add(330, 'm'))
+                  // console.log("Moment: ", moment(e.target.value).add(330, 'm'))
                 }
                 }
                 className="form-control"

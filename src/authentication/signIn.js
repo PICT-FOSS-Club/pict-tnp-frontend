@@ -39,7 +39,7 @@ const LoginForm = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
 
           setalertMessage({
             ...alertMessage,
@@ -61,7 +61,7 @@ const LoginForm = () => {
             wholeAlert: "alert d-block alert-danger",
             message: "Incorrect email and password combination!",
           });
-          console.log("errrr", err);
+          // console.log("errrr", err);
         });
     }
   };

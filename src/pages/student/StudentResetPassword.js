@@ -10,7 +10,7 @@ const StudentResetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("token:", token, " id:", id);
+    // console.log("token:", token, " id:", id);
 
     //validate whether newPass and confirmPass are same:
     if (newPass !== confirmPass) {
@@ -30,7 +30,7 @@ const StudentResetPassword = () => {
     await axios
       .post(url, data, { withCredentials: true })
       .then(async (res) => {
-        console.log("Response after Updating Password:", res.data);
+        // console.log("Response after Updating Password:", res.data);
 
         // cookies are set after new password has been set, so we'll make user redirect to logout so he can relogin
         await axios.post(
@@ -41,7 +41,7 @@ const StudentResetPassword = () => {
         return navigate("/sign-out");
       })
       .catch((err) => {
-        console.log("Error in Updating Password:", err);
+        // console.log("Error in Updating Password:", err);
       });
   };
 

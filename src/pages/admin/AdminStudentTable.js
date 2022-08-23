@@ -26,7 +26,7 @@ const AdminStudentTable = () => {
         let selectedFile = e.target.files[0];
         setLoading(true);
         if (selectedFile) {
-            console.log(selectedFile.type);
+            // console.log(selectedFile.type);
             if (selectedFile && fileType.includes(selectedFile.type)) {
                 let reader = new FileReader();
                 reader.readAsArrayBuffer(selectedFile);
@@ -42,7 +42,7 @@ const AdminStudentTable = () => {
             setLoading(false);
         }
         else {
-            console.log('Please select your file');
+            // console.log('Please select your file');
         }
     }
 
@@ -54,17 +54,17 @@ const AdminStudentTable = () => {
             const worksheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[worksheetName];
             const data = XLSX.utils.sheet_to_json(worksheet);
-            console.log(data)
+            // console.log(data)
             const json = JSON.stringify(data);
             setLoading(true);
-            console.log(json)
+            // console.log(json)
             axios.post('http://localhost:8080/admin/register/students', data, { withCredentials: true })
                 .then(function (res) {
-                    console.log(res);
+                    // console.log(res);
                     setLoading(false);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                     setLoading(false);
                 });
         }
@@ -78,7 +78,7 @@ const AdminStudentTable = () => {
                 setLoading(false);
                 // console.log(res.data)
             }).catch((err) => {
-                console.log('err', err);
+                // console.log('err', err);
                 setLoading(false);
             })
     }, [])

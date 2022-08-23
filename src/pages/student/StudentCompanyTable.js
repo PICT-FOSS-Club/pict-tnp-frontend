@@ -17,12 +17,12 @@ const StudentCompanyTable = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log('res', res.data.data);
+        // console.log('res', res.data.data);
         setStudentCompanyTable(res.data.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         setLoading(false);
       });
   }, []);

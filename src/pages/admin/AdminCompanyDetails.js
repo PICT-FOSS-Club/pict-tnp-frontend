@@ -19,12 +19,12 @@ const AdminCompanyDetails = () => {
 
         await axios.post('http://localhost:8080/company/job/round/add', newRound, { withCredentials: true })
             .then((res) => {
-                console.log('After adding new round: ', res);
+                // console.log('After adding new round: ', res);
                 alert("Added new round successfully!");
                 window.location.reload();
             })
             .catch((err) => {
-                console.log("Err: ", err);
+                // console.log("Err: ", err);
             })
     }
 
@@ -33,12 +33,12 @@ const AdminCompanyDetails = () => {
 
         await axios.post('http://localhost:8080/company/job/round/update', updateRound, { withCredentials: true })
             .then((res) => {
-                console.log('After updating rounds: ', res);
+                // console.log('After updating rounds: ', res);
                 alert("Updating round details was successfull!");
                 window.location.reload();
             })
             .catch((err) => {
-                console.log("err: ", err);
+                // console.log("err: ", err);
             })
     }
 
@@ -46,12 +46,12 @@ const AdminCompanyDetails = () => {
         async function fetchData() {
             await axios.get(`http://localhost:8080/admin/company/job/details/${state.jobId}`, { withCredentials: true })
                 .then((res) => {
-                    console.log('After get request:', res.data.data);
+                    // console.log('After get request:', res.data.data);
                     setCompany(res.data.data);
                     setLoading(false);
                 })
                 .catch((err) => {
-                    console.log('Error in get req:', err);
+                    // console.log('Error in get req:', err);
                     setLoading(false);
                 })
         }

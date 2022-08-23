@@ -37,7 +37,7 @@ const StudentCompanyTable = () => {
           return navigate("/student/dashboard");
           // console.log('sucessful login')
         } else {
-          console.log(res);
+          // console.log(res);
           return alert("Old Password did not matched");
         }
       })

@@ -23,12 +23,12 @@ const CompanyDetails = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("After get request:", res.data.data);
+        // console.log("After get request:", res.data.data);
         setApplication(res.data.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log("Error in get req:", err);
+        // console.log("Error in get req:", err);
         setLoading(false);
       });
 
@@ -37,12 +37,12 @@ const CompanyDetails = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("After get request:", res.data.data);
+        // console.log("After get request:", res.data.data);
         setLoading(false);
         setEligiblity(res.data.data)
       })
       .catch((err) => {
-        console.log("Error in get req:", err);
+        // console.log("Error in get req:", err);
         setLoading(false);
       });
   }, [state.jobId]);
@@ -59,13 +59,13 @@ const CompanyDetails = () => {
 
   const handleChangeFile = (e) => {
     setResume(e.target.files[0]);
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (resume) {
-      console.log(application._id);
+      // console.log(application._id);
       axios
         .post(
           "http://localhost:8080/student/company/job/apply",
@@ -86,16 +86,16 @@ const CompanyDetails = () => {
               config
             )
             .then((res) => {
-              console.log("Second ", res.data);
+              // console.log("Second ", res.data);
               alert("Successfully applied to the application!");
               navigate("/student/dashboard");
             })
             .catch((err) => {
-              console.log("Error while upload document.", err);
+              // console.log("Error while upload document.", err);
             });
         })
         .catch((err) => {
-          console.log("Error", err);
+          // console.log("Error", err);
         });
     }
   };

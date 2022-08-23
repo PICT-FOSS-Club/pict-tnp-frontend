@@ -16,12 +16,12 @@ const BasicForm = () => {
 
         await axios.post('http://localhost:8080/company/add', company,{withCredentials:true})
         .then((res)=>{
-          console.log("Res: ",res);
+          // console.log("Res: ",res);
           alert("Company added successfully!");
           window.location.reload();
         })
         .catch((err)=>{
-          console.log("err: ",err);
+          // console.log("err: ",err);
         })
       }
 

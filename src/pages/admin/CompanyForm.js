@@ -87,7 +87,7 @@ const CompanyForm = () => {
   // handle click event of the Add button
   const handleAddClick = () => {
     setJDInputList([...JDinputList, { jobDes: "",ctc:"" }]);
-    console.log(JDinputList);
+    // console.log(JDinputList);
   };
 
     // handle input change
@@ -108,7 +108,7 @@ const CompanyForm = () => {
       // handle click event of the Add button
       const handleSkillAddClick = () => {
         setSkill([...skills, { skill:"" }]);
-        console.log(skills);
+        // console.log(skills);
       };
 
     // handle input change
@@ -133,7 +133,7 @@ const CompanyForm = () => {
         venue: "",
         date: "",
         time: "" }]);
-        console.log(drive);
+        // console.log(drive);
       };
 
     return ( 

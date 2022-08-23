@@ -18,7 +18,7 @@ const ForgotPassword = () => {
             email: email
         }, { withCredentials: true })
             .then((res) => {
-                console.log('Response after post request in axios:', res);
+                // console.log('Response after post request in axios:', res);
 
                 alert('Email sent your email successfully! Please check your email id.');
             })

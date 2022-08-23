@@ -119,8 +119,8 @@ const AddCompanyForm = () => {
       }
       skills.push(skill.value);
     }
-    console.log("skills", skills);
-    console.log(roundsArr.length, "total rounds");
+    // console.log("skills", skills);
+    // console.log(roundsArr.length, "total rounds");
 
     setCompany({
       ...company,
@@ -139,12 +139,12 @@ const AddCompanyForm = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("Company added:", res.data);
+        // console.log("Company added:", res.data);
         alert("Company added successfully!");
         window.location.reload();
       })
       .catch((err) => {
-        console.log("Error in adding company:", err);
+        // console.log("Error in adding company:", err);
         alert("Something went wrong!");
       });
   };

@@ -25,7 +25,7 @@ const AdminCompanyTable = () => {
             "newPassword": newPass,
             "confirmPassword": confirmPass
         }, { withCredentials: true }).catch((error)=>{
-            console.log('eeee',error)
+            // console.log('eeee',error)
             alert("Old Password did not matched");
         });
 

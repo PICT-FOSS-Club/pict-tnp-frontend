@@ -16,7 +16,7 @@ const StudentProfile = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log('Error in get req:', err);
+        // console.log('Error in get req:', err);
         setLoading(false);
       })
   }, []);

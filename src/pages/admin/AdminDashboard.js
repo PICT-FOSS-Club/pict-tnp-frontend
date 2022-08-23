@@ -15,11 +15,11 @@ export default function AdminDashboard() {
     axios.get("http://localhost:8080/admin/dashboard/details", { withCredentials: true })
       .then(res => {
         setDashboardDetials(res.data.dashboard_details);
-        console.log(res.data);
+        // console.log(res.data);
         setLoading(false);
       })
       .catch(err => {
-        console.log(err.data);
+        // console.log(err.data);
         setLoading(false);
       })
   }, []);

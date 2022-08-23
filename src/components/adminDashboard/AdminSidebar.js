@@ -52,14 +52,14 @@ export default function AdminSidebar() {
   const handleSignOut = () => {
     axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true })
       .then(res => {
-        console.log("Admin Logout");
+        // console.log("Admin Logout");
         setCookie("usertype", "", { path: "/" });
         setCookie("token1", "", { path: "/" });
         setCookie("username", "", { path: "/" });
         navigate("/");
       })
       .catch(err => {
-        console.log("Error ", err);
+        // console.log("Error ", err);
       })
   }
 
@@ -140,7 +140,7 @@ export default function AdminSidebar() {
                         data-feather="shopping-cart"
                         className="align-text-bottom"
                       ></span>
-                      <i class="bi bi-clipboard2-data"></i>
+                      <i className="bi bi-clipboard2-data"></i>
                       Generate Report
                     </Link>
                   </li>

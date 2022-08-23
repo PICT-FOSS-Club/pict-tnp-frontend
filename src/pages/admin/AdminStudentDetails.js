@@ -20,7 +20,7 @@ const AdminStudentDetails = () => {
     useEffect(() => {
         axios.get(`http://localhost:8080/admin/student/profile/${state.studentId}`, { withCredentials: true })
             .then((res) => {
-                console.log('After get request:', res.data);
+                // console.log('After get request:', res.data);
                 setStudent(res.data.data);
                 setLoading(false);
             })

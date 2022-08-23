@@ -11,12 +11,12 @@ export default function StudentDashboard() {
     axios
       .get("http://localhost:8080/student/company/job/applied", { withCredentials: true })
       .then((res) => {
-        console.log("After get request:", res.data.data);
+        // console.log("After get request:", res.data.data);
         setAppliedCompanies(res.data.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log("Error in get req:", err);
+        // console.log("Error in get req:", err);
         setLoading(false);
       });
   }, []);

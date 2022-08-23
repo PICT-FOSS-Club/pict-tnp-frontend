@@ -35,7 +35,7 @@ const AdminStudentRoundTable = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("res", res.data.data);
+        // console.log("res", res.data.data);
         setStudentTable(res.data.data);
 
         res.data.data.map((student) => {
@@ -50,7 +50,7 @@ const AdminStudentRoundTable = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
       });
   }, []);
 
@@ -67,7 +67,7 @@ const AdminStudentRoundTable = () => {
   const handleUpdateRound = async () => {
     await axios.post('http://localhost:8080/company/job/round/result/declare', roundDetails, {withCredentials:true})
     .then((res)=>{
-      console.log("res bdhs: ",res);
+      // console.log("res bdhs: ",res);
         if(res.status==200){
             alert("Round updated successfully!");
         }else{
