@@ -40,7 +40,7 @@ export default function StudentDashboard() {
 
       <div className="row">
         {/* if no companies applied */}
-        {appliedCompanies
+        {appliedCompanies.length
           ? appliedCompanies.map((application, key) => {
               return (
                 <div className="col-md-4 my-5" key={key}>

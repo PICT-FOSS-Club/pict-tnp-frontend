@@ -58,6 +58,7 @@ function Table({ columns, data }) {
             </thead>
             <tbody {...getTableBodyProps()}>
                 {rows.map((row, i) => {
+                    row.values.srno = i+1
                     prepareRow(row)
                     return (
                         <tr {...row.getRowProps()}>
@@ -162,7 +163,7 @@ function ReportTable(props) {
     );
 
     const data = props.reportData;
-    // console.log(props.reportData);
+    console.log(props.reportData);
 
     return (
         <Styles>

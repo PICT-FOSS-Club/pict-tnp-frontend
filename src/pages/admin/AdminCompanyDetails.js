@@ -246,7 +246,7 @@ const AdminCompanyDetails = () => {
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="validationDefault02" className="form-label">Round date</label>
-                                    <input type="datetime-local" className="form-control" name='date'
+                                    <input type="date" className="form-control" name='date'
                                         // value={newRound.round.date}
                                         // onChange={(e)=>{
                                         //     e.preventDefault();

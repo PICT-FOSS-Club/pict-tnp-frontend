@@ -67,7 +67,12 @@ const AdminStudentRoundTable = () => {
   const handleUpdateRound = async () => {
     await axios.post('http://localhost:8080/company/job/round/result/declare', roundDetails, {withCredentials:true})
     .then((res)=>{
-        alert("Round updated successfully!");
+      console.log("res bdhs: ",res);
+        if(res.status==200){
+            alert("Round updated successfully!");
+        }else{
+          alert("Email not sent!");
+        }
         window.location.reload();
     }).catch((err)=>{
         alert("Something went wrong!");
