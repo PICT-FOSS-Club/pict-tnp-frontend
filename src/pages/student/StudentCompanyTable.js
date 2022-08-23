@@ -63,7 +63,7 @@ const StudentCompanyTable = () => {
           </div>
         </div>
       </div>
-
+<div className="row">
       {studentCompanyTable
         .filter((company) =>
           company.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -105,7 +105,7 @@ const StudentCompanyTable = () => {
             </div>
           </div>
         ))}
-
+</div>
       <div />
     </div>
   );

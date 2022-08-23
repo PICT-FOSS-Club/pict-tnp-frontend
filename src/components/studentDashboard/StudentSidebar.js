@@ -30,12 +30,14 @@ export default function StudentSidebar() {
   })
 
 
+
+
+
+function setActiveTag() {
   var initial_url = window.location.href;
-  var url = initial_url .split( '/' );
+  var url = initial_url.split('/');
 
-  var path = url[url.length-1];
-
-  useEffect(()=>{
+  var path = url[url.length - 1];
   if(path=='dashboard'){
     setActive({...active,dash:'active',company:'',profile:'',changePass:''});
   }else if(path=='profile'){
@@ -47,7 +49,12 @@ export default function StudentSidebar() {
   }else{
     setActive({...active,dash:'',company:'',profile:'',changePass:''})
   }
-},[])
+}
+
+
+setInterval(() => {
+  setActiveTag();
+}, 10)
 
   return (
     <div>

@@ -101,7 +101,7 @@ const CompanyDetails = () => {
   };
 
   return (
-    <div className="container application bootstrap snippets bootdey">
+    <div className="container application company bootstrap snippets bootdey">
       <div>
         <div className="profile-info">
           <div className="panel"></div>
@@ -110,6 +110,8 @@ const CompanyDetails = () => {
               <h1>{application.company[0].name}</h1>
               <h4>{application.name}</h4>
               <h5>₹ {application.ctc}</h5>
+          </div>
+          <div className="bio-graph-info">
               <h6>Eligible: {eligiblity.status ? "Yes" : "No"}</h6>
               {eligiblity.status ? <h6>Status: {eligiblity.newApplication ? "Not Applied" : "Applied"}</h6>: <></>}
               
@@ -186,11 +188,11 @@ const CompanyDetails = () => {
               <h3>Round details</h3>
               <div className="row">
                 <ul className="main__list">
-                  <li className="main__list-item">
+                  {/* <li className="main__list-item">
                     <div>
                       <p className="main__list-content">Center Point</p>
                     </div>
-                  </li>
+                  </li> */}
                   {application.roundDetails.map((drive, key) => (
                     <li className="main__list-item" key={key}>
                       <div className="main__list-content-wrap">

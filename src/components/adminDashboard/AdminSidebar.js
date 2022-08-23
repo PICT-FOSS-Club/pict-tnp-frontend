@@ -45,9 +45,9 @@ export default function AdminSidebar() {
 
 
 
-  // setInterval(() => {
-  //   setActiveTag();
-  // }, 10)
+  setInterval(() => {
+    setActiveTag();
+  }, 10)
 
   const handleSignOut = () => {
     axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true })
