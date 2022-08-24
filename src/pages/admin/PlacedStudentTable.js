@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import "../../assets/css/admincompanytable.css";
 import PdfGenerator from "./pdf/PdfGenerator";
@@ -11,6 +11,8 @@ const PlacedStudentTable = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
 
   const [filteredTable, setFilteredTable] = useState([]);
   const [branch, setBranch] = useState({
@@ -279,7 +281,7 @@ const PlacedStudentTable = () => {
                 <td>{student.branch}</td>
                 <td> PhonePe</td>
                 <td>
-                  <Link to={`/admin/student/profile/${student._id}`}>View</Link>
+                  <Link to="#" onClick={(e)=>{e.preventDefault(); navigate("/admin/student/profile",{state:{studentId: student._id}})}}>View</Link>
                 </td>
               </tr>
             ))}

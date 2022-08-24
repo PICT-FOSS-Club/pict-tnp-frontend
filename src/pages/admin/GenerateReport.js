@@ -16,7 +16,7 @@ const GenerateReport = () => {
                     withCredentials: true,
                 })
                 .then((res) => {
-                    // console.log(res.data.data);
+                    console.log(res.data.data);
                     setCompanyTable(res.data.data);
                     setLoading(false);
                 })

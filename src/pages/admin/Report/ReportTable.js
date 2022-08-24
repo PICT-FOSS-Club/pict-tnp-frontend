@@ -155,6 +155,10 @@ function ReportTable(props) {
                 accessor: "salary"
             },
             {
+                Header: "Total salary LPA",
+                accessor: "totalSalaryOfferedByJob"
+            },
+            {
                 Header: "Date visited",
                 accessor: "visitDate"
             },

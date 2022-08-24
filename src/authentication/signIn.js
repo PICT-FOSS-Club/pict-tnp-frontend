@@ -8,6 +8,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["usertype", "username", "token1"]);
 
+  const [isLoading, setLoading] = useState(false);
+
   const [alertMessage, setalertMessage] = React.useState({
     message: "",
     wholeAlert: "alert d-none alert-success",
@@ -21,18 +23,22 @@ const LoginForm = () => {
   const [usertype, setUserType] = useState("student");
 
   const formValidate = () => {
+    setLoading(true);
+    // console.log("Something");
     if (formValue.email === "") {
       setalertMessage({
         ...alertMessage,
         wholeAlert: "alert d-block alert-danger",
         message: "Email can't be empty!",
       });
+      // setLoading(false);
     } else if (formValue.password === "") {
       setalertMessage({
         ...alertMessage,
         wholeAlert: "alert d-block alert-danger",
         message: "Password can't be empty!",
       });
+      // setLoading(false);
     } else {
       axios
         .post(`http://localhost:8080/${usertype}/login`, formValue, {
@@ -46,13 +52,14 @@ const LoginForm = () => {
             wholeAlert: "alert d-block alert-success",
             message: "Login successfull!",
           });
+          
           setCookie("token1", res.data.token, { path: "/", maxAge: 43200 }); // 30 days
           setCookie("usertype", `${usertype}`, { path: "/", maxAge: 43200 });
           setCookie("username", res.data?.student?.firstName, {
             path: "/",
             maxAge: 43200,
           });
-
+          setLoading(false);
           navigate(`${usertype}/dashboard`);
         })
         .catch((err) => {
@@ -63,6 +70,7 @@ const LoginForm = () => {
           });
           // console.log("errrr", err);
         });
+        setLoading(false);
     }
   };
 
@@ -76,6 +84,16 @@ const LoginForm = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -28,7 +28,7 @@ const AdminStudentRoundTable = () => {
   });
 
   useEffect(() => {
-    setLoading(false);
+    setLoading(true);
     axios
       .get(
         `http://localhost:8080/admin/company/${state.listType}/${state.roundNo}/${state.jobId}`,
@@ -65,8 +65,10 @@ const AdminStudentRoundTable = () => {
   }
 
   const handleUpdateRound = async () => {
+    setLoading(true)
     await axios.post('http://localhost:8080/company/job/round/result/declare', roundDetails, {withCredentials:true})
     .then((res)=>{
+      setLoading(false);
       // console.log("res bdhs: ",res);
         if(res.status==200){
             alert("Round updated successfully!");
@@ -76,6 +78,7 @@ const AdminStudentRoundTable = () => {
         window.location.reload();
     }).catch((err)=>{
         alert("Something went wrong!");
+        setLoading(false);
     })
   }
 

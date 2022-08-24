@@ -15,6 +15,7 @@ const CompanyDetails = () => {
 
   const location = useLocation();
 
+
   const state = location.state;
 
   useEffect(() => {
@@ -47,15 +48,6 @@ const CompanyDetails = () => {
       });
   }, [state.jobId]);
 
-  if (isLoading) {
-    return (
-      <div className="text-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-  }
 
   const handleChangeFile = (e) => {
     setResume(e.target.files[0]);
@@ -64,6 +56,7 @@ const CompanyDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (resume) {
       // console.log(application._id);
       axios
@@ -89,16 +82,31 @@ const CompanyDetails = () => {
               // console.log("Second ", res.data);
               alert("Successfully applied to the application!");
               navigate("/student/dashboard");
+    setLoading(false);
+
             })
             .catch((err) => {
               // console.log("Error while upload document.", err);
+    setLoading(false);
+
             });
         })
         .catch((err) => {
           // console.log("Error", err);
+          setLoading(false);
         });
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container application company bootstrap snippets bootdey">
