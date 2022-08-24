@@ -10,6 +10,8 @@ const AddJobOpen = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [isLoading, setLoading] = useState(false);
+
   const state = location.state;
   // console.log(state.companyId);
   const [company, setCompany] = useState({
@@ -172,6 +174,7 @@ const AddJobOpen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (jobFile) {
       await axios.post('http://localhost:8080/company/job/add', company, { withCredentials: true })
         .then(async (res) => {
@@ -181,18 +184,34 @@ const AddJobOpen = () => {
           await axios.post(`http://localhost:8080/job/files/${res.data.data.companyId}/${res.data.data._id}`, formData, { withCredentials: true, headers: { "content-type": "multipart/form-data" } })
             .then(res => {
               alert("File Uploaded Successfully");
+              setLoading(false);
             })
           alert("New job opening added successfully!");
           // window.location.reload();
           navigate('/admin/company-table');
+          setLoading(false);
         })
         .catch((err) => {
           // console.log("err: ", err);
+          setLoading(false);
         })
     } else {
       alert("Kindly select job description file!");
+      setLoading(false);
+
     }
   }
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div id="adminCOmpanyTable">
       <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>{state.companyName} - Add new job opening</h3></div>
@@ -247,7 +266,7 @@ const AddJobOpen = () => {
             </label>
             <div className="row" style={{ alignItems: "center" }}>
               <div className="col-md-6">
-                <input className="form-control" required onChange={(e) => { SetJobFile(e.target.files[0]) }} type="file" id="formFile" />
+                <input className="form-control" accept=".pdf" required onChange={(e) => { SetJobFile(e.target.files[0]) }} type="file" id="formFile" />
               </div>
               {/* <div className="col-md-4">
                 <button type="button" className="btn btn-primary">Upload</button>
@@ -1043,7 +1062,7 @@ const AddJobOpen = () => {
           <hr className="my-2" />
           <div className="col-md-12 mx-3 my-2">
             <button className="btn btn-primary" type="submit">
-              Add company
+              Add job
             </button>
           </div>
 

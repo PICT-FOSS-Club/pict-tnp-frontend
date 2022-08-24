@@ -49,6 +49,7 @@ const AdminStudentTable = () => {
     // submit function
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if (excelFile !== null) {
             const workbook = XLSX.read(excelFile, { type: 'buffer' });
             const worksheetName = workbook.SheetNames[0];
@@ -67,6 +68,8 @@ const AdminStudentTable = () => {
                     // console.log(error);
                     setLoading(false);
                 });
+        }else{
+            setLoading(false);
         }
     }
 
@@ -138,9 +141,9 @@ const AdminStudentTable = () => {
                     {studentTable.filter(student => student.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || student.aadharCard.toString().includes(searchQuery) || student.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || student.email.includes(searchQuery) || student.phone.toString().includes(searchQuery) || student.pictRegistrationId.includes(searchQuery) || student.rollNumber.toString().includes(searchQuery)).map((student) => (
                         <tr key={student.pictRegistrationId}>
                             <td>{student.firstName} {student.middleName} {student.lastName}</td>
-                            <td>{(student.isGT20 || student.isLTE20) ? "Yes" : "No"}</td>
-                            <td>{(student.isGT20) ? "Yes" : "No"}</td>
-                            <td>{(student.isLTE20) ? "Yes" : "No"}</td>
+                            <td>{(student.GT20.status || student.LTE20.status) ? "Yes" : "No"}</td>
+                            <td>{(student.LTE20.status) ? "Yes" : "No"}</td>
+                            <td>{(student.GT20.status) ? "Yes" : "No"}</td>
                             <td onClick={(e) => {
                                 e.preventDefault();
                                 navigate("/admin/student/profile", { state: { studentId: student._id } });
