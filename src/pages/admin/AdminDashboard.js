@@ -92,7 +92,7 @@ export default function AdminDashboard() {
                 <div className="col d-flex align-items-center">
                 <i className="bi bi-currency-rupee"></i>
                   <div>
-                    <h4 className="fw-bold mb-0">{(dashboardDetials.averageCTC !== null) ? parseFloat(dashboardDetials.averageCTC).toFixed(3) : 0} LPA</h4>
+                    <h4 className="fw-bold mb-0">{(dashboardDetials.avgSalaryBaggedByPlacedStudents !== null) ? parseFloat(dashboardDetials.avgSalaryBaggedByPlacedStudents).toFixed(3) : 0} LPA</h4>
                   </div>
                 </div>
               </div>
