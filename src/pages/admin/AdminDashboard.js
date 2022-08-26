@@ -130,28 +130,29 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </Link>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-md-4">
+                <BranchPieChart
+                  csPlacedStudents={dashboardDetials.csPlacedStudents}
+                  itPlacedStudents={dashboardDetials.itPlacedStudents}
+                  entcPlacedStudents={dashboardDetials.entcPlacedStudents}
+                />
+              </div>
+
+              {/* to be implemeneted in future */}
+
+              <div className="col-md-8">
+                <BarChart
+                  csPlacedStudents={dashboardDetials.csPlacedStudents}
+                  itPlacedStudents={dashboardDetials.itPlacedStudents}
+                  entcPlacedStudents={dashboardDetials.entcPlacedStudents}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <hr />
-        <div className="row">
-          <div className="col-md-4">
-            <BranchPieChart
-              csPlacedStudents={dashboardDetials.csPlacedStudents}
-              itPlacedStudents={dashboardDetials.itPlacedStudents}
-              entcPlacedStudents={dashboardDetials.entcPlacedStudents}
-            />
-          </div>
-
-          {/* to be implemeneted in future */}
-          
-          <div className="col-md-8">
-            <BarChart csPlacedStudents={dashboardDetials.csPlacedStudents}
-              itPlacedStudents={dashboardDetials.itPlacedStudents}
-              entcPlacedStudents={dashboardDetials.entcPlacedStudents} />
-          </div>
-
-        </div>
-      </div>
     </div>
   );
 }
