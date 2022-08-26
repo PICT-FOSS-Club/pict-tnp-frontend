@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./css/login.css";
+import "../assets/css/login.css";
 import { useCookies } from "react-cookie";
 
 const LoginForm = () => {
@@ -40,6 +40,7 @@ const LoginForm = () => {
       });
       // setLoading(false);
     } else {
+      setLoading(true);
       axios
         .post(`http://localhost:8080/${usertype}/login`, formValue, {
           withCredentials: true,
@@ -69,8 +70,8 @@ const LoginForm = () => {
             message: "Incorrect email and password combination!",
           });
           // console.log("errrr", err);
+          setLoading(false);
         });
-        setLoading(false);
     }
   };
 
@@ -87,7 +88,7 @@ const LoginForm = () => {
 
   if (isLoading) {
     return (
-      <div className="text-center">
+      <div className="text-center my-3">
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>

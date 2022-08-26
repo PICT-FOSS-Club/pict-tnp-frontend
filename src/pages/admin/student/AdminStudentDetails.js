@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import "../../assets/css/studentprofile.css"
+import "../../../assets/css/studentprofile.css"
 
 
 const AdminStudentDetails = () => {

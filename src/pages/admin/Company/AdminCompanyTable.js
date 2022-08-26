@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { Link, useNavigate } from "react-router-dom";
-import "../../assets/css/admincompanytable.css";
-import AddCompanyForm from "./AddCompanyForm";
+import "../../../assets/css/admincompanytable.css";
+
+import BasicForm from "./addCompany/BasicForm";
 
 const AdminCompanyTable = () => {
   const [companyTable, setCompanyTable] = useState([]);
@@ -231,7 +232,7 @@ const AdminCompanyTable = () => {
             </div>
           ))}
       </div>
-      <AddCompanyForm />
+      {/* <BasicForm /> */}
     </div>
   );
 };

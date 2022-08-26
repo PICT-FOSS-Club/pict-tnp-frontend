@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../authentication/css/login.css'
+import '../../assets/css/login.css'
 const axios = require('axios');
 
 const AdminCompanyTable = () => {

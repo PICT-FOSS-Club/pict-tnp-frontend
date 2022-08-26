@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./StudentUpdatePassword.css";
+import "../../assets/css/StudentUpdatePassword.css";
 const axios = require("axios");
 
 const StudentCompanyTable = () => {

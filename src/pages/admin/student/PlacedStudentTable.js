@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import "../../assets/css/admincompanytable.css";
-import PdfGenerator from "./pdf/PdfGenerator";
+import "../../../assets/css/admincompanytable.css";
+import PdfGenerator from "../Company/pdf/PdfGenerator";
 
 const PlacedStudentTable = () => {
   const [studentTable, setStudentTable] = useState([]);
@@ -257,13 +257,13 @@ const PlacedStudentTable = () => {
           {studentTable
             .filter(
               (student) =>
-                ((course.ug ? student.isUg == true : console.log("ug")) ||
-                  (course.pg ? student.isUg == false : console.log("pg"))) &&
-                ((branch.cs ? student.branch == "cs" : console.log("cs")) ||
-                  (branch.it ? student.branch == "it" : console.log("it")) ||
+                ((course.ug ? student.isUg == true : console.log("")) ||
+                  (course.pg ? student.isUg == false : console.log(""))) &&
+                ((branch.cs ? student.branch == "cs" : console.log("")) ||
+                  (branch.it ? student.branch == "it" : console.log("")) ||
                   (branch.entc
                     ? student.branch == "entc"
-                    : console.log("entc")))
+                    : console.log("")))
             )
             .filter((student) =>
               student.firstName

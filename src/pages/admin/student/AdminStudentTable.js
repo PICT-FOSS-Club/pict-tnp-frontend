@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as XLSX from 'xlsx'
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "../../assets/css/admincompanytable.css";
+import "../../../assets/css/admincompanytable.css";
 
 
 const AdminStudentTable = () => {

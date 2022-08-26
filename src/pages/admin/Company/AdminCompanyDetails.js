@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
-import "../../assets/css/studentprofile.css"
-import { moment } from 'moment';
+import "../../../assets/css/studentprofile.css";
+
 
 const AdminCompanyDetails = () => {
     const params = useParams();

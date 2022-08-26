@@ -1,7 +1,7 @@
 import "../../assets/css/admincompanytable.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ReportTable from "./Report/ReportTable";
+import ReportTable from "./Company/Report/ReportTable";
 
 
 const GenerateReport = () => {

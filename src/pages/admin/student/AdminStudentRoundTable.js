@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import "../../assets/css/admincompanytable.css";
+import "../../../assets/css/admincompanytable.css";
 
 const AdminStudentRoundTable = () => {
   axios.defaults.withCredentials = true;

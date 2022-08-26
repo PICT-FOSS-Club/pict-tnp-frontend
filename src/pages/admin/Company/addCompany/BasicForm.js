@@ -1,7 +1,9 @@
 import { useState } from "react";
-import "../../../assets/css/admincompanytable.css";
-import "../../../assets/css/studentprofile.css"
+import "../../../../assets/css/admincompanytable.css";
+import "../../../../assets/css/studentprofile.css"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const BasicForm = () => {
 
     const [company, setCompany] = useState({
@@ -11,6 +13,8 @@ const BasicForm = () => {
         companyLocation: "",
       });
 
+      const navigate = useNavigate();
+
       const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -18,7 +22,8 @@ const BasicForm = () => {
         .then((res)=>{
           // console.log("Res: ",res);
           alert("Company added successfully!");
-          window.location.reload();
+          // window.location.reload();
+          navigate("/admin/company-table");
         })
         .catch((err)=>{
           // console.log("err: ",err);

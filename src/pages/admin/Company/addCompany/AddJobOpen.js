@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "../../../assets/css/admincompanytable.css";
-import "../../../assets/css/studentprofile.css";
+import "../../../../assets/css/admincompanytable.css";
+import "../../../../assets/css/studentprofile.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
+
 
 const AddJobOpen = () => {
 

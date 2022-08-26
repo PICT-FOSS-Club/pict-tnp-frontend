@@ -1,35 +1,55 @@
-import AdminSidebar from "./components/adminDashboard/AdminSidebar";
-import "./App.css";
-import StudentSidebar from "./components/studentDashboard/StudentSidebar";
+
+
 import { Route, Routes } from "react-router-dom";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-// import LandingPage from "./pages/LandingPage";
-import Footer from "./components/utilities/Footer";
-import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentProfile from "./pages/student/StudentProfile";
+
+//common
 import LoginForm from "./authentication/signIn";
-// import AdminStudentList from "./pages/admin/AdminStudentList";
-import AdminStudentDetails from "./pages/admin/AdminStudentDetails";
-import AdminCompanyDetails from "./pages/admin/AdminCompanyDetails";
-import AdminStudentRoundTable from "./pages/admin/AdminStudentRoundTable";
-import StudentUpdatePassword from "./pages/student/StudentUpdatePassword";
-import AdminUpdatePassword from "./pages/admin/AdminUpdatePassword";
-import StudentResetPassword from "./pages/student/StudentResetPassword";
-import AdminResetPassword from "./pages/admin/AdminResetPassword";
-import ForgotPassword from "./pages/ForgotPassword";
-import StudentCompanyTable from "./pages/student/StudentCompanyTable";
-import AdminStudentTable from "./pages/admin/AdminStudentTable";
-import AdminCompanyTable from "./pages/admin/AdminCompanyTable";
 import Team from "./components/utilities/Team";
-import CompanyDetails from "./pages/student/CompanyDetails";
-import StudentFilter from "./pages/admin/StudentFilterTable";
-import PlacedStudentTable from "./pages/admin/PlacedStudentTable";
+import Footer from "./components/utilities/Footer";
+
+//auth
+import ForgotPassword from "./authentication/ForgotPassword";
 import RequireAuth from "./authentication/RequireAuth";
-import Unauthorized from "./pages/Unauthorized";
-import CompanyForm from "./pages/admin/CompanyForm";
-import BasicForm from "./pages/admin/addCompany/BasicForm";
-import AddJobOpen from "./pages/admin/addCompany/AddJobOpen";
+
+//admin/auth
+import AdminUpdatePassword from "./authentication/admin/AdminUpdatePassword";
+import AdminResetPassword from "./authentication/admin/AdminResetPassword";
+
+//admin/dashboard
+import AdminSidebar from "./components/adminDashboard/AdminSidebar";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+//admin/student
+import AdminStudentTable from "./pages/admin/student/AdminStudentTable";
+import PlacedStudentTable from "./pages/admin/student/PlacedStudentTable";
+import AdminStudentDetails from "./pages/admin/student/AdminStudentDetails";
+import AdminStudentRoundTable from "./pages/admin/student/AdminStudentRoundTable";
+
+//admin/company
+import BasicForm from "./pages/admin/Company/addCompany/BasicForm";
+import AddJobOpen from "./pages/admin/Company/addCompany/AddJobOpen";
+import AdminCompanyTable from "./pages/admin/Company/AdminCompanyTable";
+import AdminCompanyDetails from "./pages/admin/Company/AdminCompanyDetails";
+
+//admin/report
 import GenerateReport from "./pages/admin/GenerateReport";
+
+//student/auth
+import StudentResetPassword from "./authentication/student/StudentResetPassword";
+import StudentUpdatePassword from "./authentication/student/StudentUpdatePassword";
+import Unauthorized from "./authentication/Unauthorized";
+
+
+//student/dashboard
+import StudentSidebar from "./components/studentDashboard/StudentSidebar";
+import StudentDashboard from "./pages/student/StudentDashboard";
+
+//student/profile
+import StudentProfile from "./pages/student/StudentProfile";
+
+//student/company
+import StudentCompanyTable from "./pages/student/StudentCompanyTable";
+import CompanyDetails from "./pages/student/CompanyDetails";
 
 function App() {
   return (
@@ -48,7 +68,7 @@ function App() {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="student-table" element={<AdminStudentTable />} />
             <Route path="placedStudents" element={<PlacedStudentTable />} />
-            <Route path="student-filter" element={<StudentFilter />} />
+            {/* <Route path="student-filter" element={<StudentFilter />} /> */}
             <Route path="company-table" element={<AdminCompanyTable />} />
             <Route path="add-company" element={<BasicForm />} />
             <Route path="add-job" element={<AddJobOpen />} />
@@ -78,7 +98,6 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="password/forgot" element={<ForgotPassword />} />
         <Route path="unauthorized" element={<Unauthorized />} />
       </Routes>
       <Footer></Footer>
