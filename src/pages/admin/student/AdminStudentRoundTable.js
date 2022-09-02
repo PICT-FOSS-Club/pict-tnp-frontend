@@ -11,7 +11,6 @@ const AdminStudentRoundTable = () => {
   const [studentTable, setStudentTable] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterStudentsList, setFilterStudentList] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
 
@@ -35,7 +34,7 @@ const AdminStudentRoundTable = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        // console.log("res", res.data.data);
+        console.log("res", res.data.data);
         setStudentTable(res.data.data);
 
         res.data.data.map((student) => {
@@ -85,7 +84,7 @@ const AdminStudentRoundTable = () => {
   return (
     <div id="adminCOmpanyTable">
       <div className="col-md-4 col-sm-4 col-sx-4 col-4">
-        <h3>{`${state.companyName} Round ${state.roundNo} - ${state.listType} Students`}</h3>
+        <h3>{`${state.companyName} (${state.jobName}) Round ${state.roundNo} - ${state.listType} Students`}</h3>
       </div>
       <div className="row my-3">
         <div className="d-flex justify-content-between">
@@ -106,6 +105,17 @@ const AdminStudentRoundTable = () => {
               Enter the details like firstname, lastname, email, roll no, etc.
             </div>
           </div>
+
+          <form className="col-md-5">
+              <div className="myFlex">
+                  <div>
+                      <label htmlFor="formFileSm" className="form-label">Update round list</label>
+                      <input className="form-control" id="formFileSm" type="file" required />
+                  </div>
+                  <button type="submit" className="myBtn mx-1 btn btn-primary">Update</button>
+              </div>
+          </form>
+
           <div className="col-md-3" style={{ marginTop: "34px" }}>
             <ReactHTMLTableToExcel
               id="test-table-xls-button"
@@ -169,14 +179,16 @@ const AdminStudentRoundTable = () => {
                   <Link to="#">View</Link>
                 </td>
                 <td>
-                  <div className="form-check form-switch">
+                  <div className="form-check form-switch" 
+                      data-tooltip={(student.LTE20.status || student.GT20.status) ? "Placed in other company" : "Not placed yet"}>
                     <input
                       className="form-check-input"
 
-                      onChange={(e) => {
-                       
+                      disabled = {(student.LTE20.status || student.GT20.status) ? true : false}
 
-                        e.target.checked
+                      onChange={(e) => {
+
+                      e.target.checked
                           ? setRoundDetails({
                               ...roundDetails,
                               qualifiedStudentIds: [

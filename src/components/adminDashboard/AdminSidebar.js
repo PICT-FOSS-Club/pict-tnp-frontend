@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../assets/css/style.css";
 import { useCookies } from "react-cookie";
+import AddadminForm from "../../pages/admin/addAdmin/addAdminForm";
 
 export default function AdminSidebar() {
 
@@ -45,9 +46,9 @@ export default function AdminSidebar() {
 
 
 
-  // setInterval(() => {
-  //   setActiveTag();
-  // }, 10)
+  setInterval(() => {
+    setActiveTag();
+  }, 10)
 
   const handleSignOut = () => {
     axios.post("http://localhost:8080/admin/logout", {}, { withCredentials: true })
@@ -160,6 +161,18 @@ export default function AdminSidebar() {
                   </Link>
                 </h6>
                 <ul className="nav flex-column mb-2">
+ 
+                <li className="nav-item" data-bs-toggle="modal" data-bs-target="#addadminform">
+                  <Link className={`nav-link`} to="#">
+                        <span
+                          data-feather="file-text"
+                          className="align-text-bottom"
+                        ></span>
+                        <i class="bi bi-person-rolodex"></i>
+                        Add admin
+                  </Link>
+                  </li>
+                  
                   <li className="nav-item">
                     <Link className={`nav-link ${active.changePass}`} to="/admin/password/update">
                       <span
@@ -190,6 +203,7 @@ export default function AdminSidebar() {
               </div>
             </main>
 
+            <AddadminForm />
           </div>
         </div>
         <div>

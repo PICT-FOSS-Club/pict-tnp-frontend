@@ -117,7 +117,7 @@ const CompanyDetails = () => {
           <div className="bio-graph-heading">
               <h1>{application.company[0].name}</h1>
               <h4>{application.name}</h4>
-              <h5>₹ {application.ctc}</h5>
+              <h5>₹ {application.ctc} LPA</h5>
           </div>
           <div className="bio-graph-info">
               <h6>Eligible: {eligiblity.status ? "Yes" : "No"}</h6>

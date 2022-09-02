@@ -101,7 +101,7 @@ const AdminCompanyDetails = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        navigate("/admin/student-round-table", { state: { jobId: company._id, companyName: company.name, roundNo: e.target.id, listType: e.target.value } });
+        navigate("/admin/student-round-table", { state: { jobId: company._id, jobName:company.name, companyName: company.company[0].name, roundNo: e.target.id, listType: e.target.value } });
     }
 
     const handleDeleteJob = async (e) => {
