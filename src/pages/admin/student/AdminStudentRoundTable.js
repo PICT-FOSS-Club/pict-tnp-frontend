@@ -2,7 +2,7 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+// import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "../../../assets/css/admincompanytable.css";
 
 const AdminStudentRoundTable = () => {
@@ -117,14 +117,14 @@ const AdminStudentRoundTable = () => {
           </form>
 
           <div className="col-md-3" style={{ marginTop: "34px" }}>
-            <ReactHTMLTableToExcel
+            {/* <ReactHTMLTableToExcel
               id="test-table-xls-button"
               className="btn btn-success"
               table="table-to-xls"
               filename={`${state.companyName}-Round-${state.roundNo}-${state.listType}`}
               sheet="tablexlsx"
               buttonText="Download Excel"
-            />
+            /> */}
           </div>
          
         </div>

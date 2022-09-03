@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import "../../../assets/css/admincompanytable.css";
 import PdfGenerator from "../Company/pdf/PdfGenerator";
 
@@ -229,13 +229,13 @@ const PlacedStudentTable = () => {
         </div>
       </div>
 
-      <ReactHTMLTableToExcel
+      {/* <ReactHTMLTableToExcel
         id="test-table-xls-button"
         className="btn btn-success my-3"
         table="table-to-xls"
         filename={'Course-[ '+(course.pg ? 'PG ': '')+(course.ug ? 'UG': '')+ ' ] Branch-[ ' +(branch.cs ? 'CS ': '')+(branch.it ? 'IT ': '')+(branch.entc ? 'ENTC ': '')+'] - '+'Placed Students'}
         sheet="tablexlsx"
-        buttonText="Download Excel"/>
+        buttonText="Download Excel"/> */}
 
         <button className="btn btn-secondary mx-2" onClick={()=>{PdfGenerator(studentTable)}}>
           Download PDF
