@@ -33,7 +33,7 @@ const CompanyDetails = () => {
         setLoading(false);
       });
 
-      axios
+    axios
       .get(`http://localhost:8080/student/company/job/eligiblity/${state.jobId}`, {
         withCredentials: true,
       })
@@ -82,12 +82,12 @@ const CompanyDetails = () => {
               // console.log("Second ", res.data);
               alert("Successfully applied to the application!");
               navigate("/student/dashboard");
-    setLoading(false);
+              setLoading(false);
 
             })
             .catch((err) => {
               // console.log("Error while upload document.", err);
-    setLoading(false);
+              setLoading(false);
 
             });
         })
@@ -114,21 +114,21 @@ const CompanyDetails = () => {
         <div className="profile-info">
           <div className="panel"></div>
           <div className="panel">
-          <div className="bio-graph-heading">
+            <div className="bio-graph-heading">
               <h1>{application.company[0].name}</h1>
               <h4>{application.name}</h4>
               <h5>₹ {application.ctc} LPA</h5>
-          </div>
-          <div className="bio-graph-info">
+            </div>
+            <div className="bio-graph-info">
               <h6>Eligible: {eligiblity.status ? "Yes" : "No"}</h6>
-              {eligiblity.status ? <h6>Status: {eligiblity.newApplication ? "Not Applied" : "Applied"}</h6>: <></>}
-              
-          </div>
+              {eligiblity.status ? <h6>Status: {eligiblity.newApplication ? "Not Applied" : "Applied"}</h6> : <></>}
+
+            </div>
             <div className="panel-body bio-graph-info">
               <h3>About application criteria</h3>
               <div className="row">
                 <div className="companyROInfo">
-                <b className={`${(!eligiblity.branch || !eligiblity.course) ? "text-danger": ""}`} >Course and Branch: </b>
+                  <b className={`${(!eligiblity.branch || !eligiblity.course) ? "text-danger" : ""}`} >Course and Branch: </b>
                   &emsp;
                   {(application.criteria.ug.cs || application.criteria.ug.it || application.criteria.ug.entc) ? <b>UG: </b> : <></>}
                   {application.criteria.ug.cs ? " CE " : ""}{" "}
@@ -142,50 +142,50 @@ const CompanyDetails = () => {
                 </div>
                 {application.criteria.aggrCgpa ? (
                   <div className="companyROInfo">
-                  <b className={`${!eligiblity.aggrCgpa ? "text-danger": ""}`} >Minimum CGPA Criteria: </b>
+                    <b className={`${!eligiblity.aggrCgpa ? "text-danger" : ""}`} >Minimum CGPA Criteria: </b>
                     {application.criteria.aggrCgpa}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
                 {application.criteria.sscPercentage ? (
                   <div className="companyROInfo">
-                  <b className={`${!eligiblity.sscPercentage ? "text-danger": ""}`} >Minimum SSC Percentage: </b>
+                    <b className={`${!eligiblity.sscPercentage ? "text-danger" : ""}`} >Minimum SSC Percentage: </b>
                     {application.criteria.sscPercentage}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
                 {application.criteria.attendance ? (
                   <div className="companyROInfo">
-                  <b className={`${!eligiblity.attendance ? "text-danger": ""}`} >Minimum Attendence: </b>
+                    <b className={`${!eligiblity.attendance ? "text-danger" : ""}`} >Minimum Attendence: </b>
                     {application.criteria.attendance}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
                 {application.criteria.amcatScore ? (
                   <div className="companyROInfo">
-                    <b className={`${!eligiblity.amcatScore ? "text-danger": ""}`} >Minimum Amcat Score: </b>
+                    <b className={`${!eligiblity.amcatScore ? "text-danger" : ""}`} >Minimum Amcat Score: </b>
                     {application.criteria.amcatScore}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
                 {application.criteria.activeBacklog ? (
                   <div className="companyROInfo">
-                    <b className={`${!eligiblity.activeBacklog ? "text-danger": ""}`} >Minimum Active Backlog: </b>
+                    <b className={`${!eligiblity.activeBacklog ? "text-danger" : ""}`} >Minimum Active Backlog: </b>
                     {application.criteria.activeBacklog}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
                 {application.criteria.passiveBacklog ? (
                   <div className="companyROInfo">
-                    <b className={`${!eligiblity.passiveBacklog ? "text-danger": ""}`} >Minimum Passive Backlog: </b>
+                    <b className={`${!eligiblity.passiveBacklog ? "text-danger" : ""}`} >Minimum Passive Backlog: </b>
                     {application.criteria.passiveBacklog}
                   </div>
-                  ) : (<></>)
+                ) : (<></>)
                 }
 
                 <div className="companyROInfo">
                   <b>Website: </b>
-                  <a href={`http://${application.websiteUrl}`} target="_blank">
+                  <a href={`http://${application.websiteUrl}`} target="_blank" rel="noreferrer noopener">
                     <i className="bi bi-globe"></i>
                   </a>
                 </div>
@@ -265,7 +265,7 @@ const CompanyDetails = () => {
                   </form>
                 </div>
               </div>
-            ): (<></>)}
+            ) : (<></>)}
           </div>
         </div>
       </div>
