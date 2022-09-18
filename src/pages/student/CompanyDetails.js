@@ -9,8 +9,8 @@ const CompanyDetails = () => {
   const [application, setApplication] = useState(null);
   const [eligiblity, setEligiblity] = useState({});
   const [resume, setResume] = useState(null);
-  const [fileAvailable, setFileAvailable] = useState(true);
-  const [fileError, setFileError] = useState("");
+  // const [fileAvailable, setFileAvailable] = useState(true);
+  // const [fileError, setFileError] = useState("");
 
   const navigate = useNavigate();
   // const { addToast } = useToasts(); //react toast notifications:
@@ -31,21 +31,21 @@ const CompanyDetails = () => {
         setLoading(false);
       });
 
-      axios
-      .get(`http://localhost:8080/student/company/job/eligiblity/${params.jobId}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log("After get request:", res.data.data);
-        // const temp = res.data.data;
-        setFileAvailable(true);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setFileAvailable(false);
-        setFileError(err.response.data.message);
-        setLoading(false);
-      });
+      // axios
+      // .get(`http://localhost:8080/student/company/job/eligiblity/${params.jobId}`, {
+      //   withCredentials: true,
+      // })
+      // .then((res) => {
+      //   console.log("After get request:", res.data.data);
+      //   // const temp = res.data.data;
+      //   setFileAvailable(true);
+      //   setLoading(false);
+      // })
+      // .catch((err) => {
+      //   setFileAvailable(false);
+      //   setFileError(err.response.data.message);
+      //   setLoading(false);
+      // });
 
     axios
       .get(
@@ -128,7 +128,6 @@ const CompanyDetails = () => {
         {application ? (
           <>
             <div className="profile-info">
-              <div className="panel"></div>
               <div className="panel">
                 <div className="bio-graph-heading">
                   {application ? (
@@ -150,14 +149,14 @@ const CompanyDetails = () => {
                     <></>
                   )}
                 </div>
-                {fileAvailable ? (
+                {/* {fileAvailable ? (
                   <iframe
                     src={`http://localhost:8080/student/job/files/${params.jobId}`}
                     frameborder="0"
                   ></iframe>
                 ) : (
                   <p>{fileError}</p>
-                )}
+                )} */}
 
                 <div className="panel-body bio-graph-info">
                   <h3>About application criteria</h3>
@@ -286,6 +285,8 @@ const CompanyDetails = () => {
                     <i className="bi bi-globe"></i>
                   </a>
                 </div>
+                </div>
+                </div>
 
                 <div className="panel-body bio-graph-info">
                   <h3>Round details</h3>
@@ -361,9 +362,7 @@ const CompanyDetails = () => {
                   <></>
                 )}
               </div>
-            </div>
-          </div>
-          </div></>
+            </div></>
         ) : null}
         </div>
       </div>
