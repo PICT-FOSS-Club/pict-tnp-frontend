@@ -14,11 +14,9 @@ const AdminStudentDetails = () => {
 
     const navigate = useNavigate();
 
-    const location = useLocation();
-    const state = location.state;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/admin/student/profile/${state.studentId}`, { withCredentials: true })
+        axios.get(`http://localhost:8080/admin/student/profile/${params.studentId}`, { withCredentials: true })
             .then((res) => {
                 // console.log('After get request:', res.data);
                 setStudent(res.data.data);
@@ -62,9 +60,7 @@ const AdminStudentDetails = () => {
                                             <div className="card-body">
                                                 {company.job[0].company[0].name} <Link to="#" onClick={(e) => {
                                                     e.preventDefault();
-                                                    navigate("/admin/company/details", {
-                                                        state: { jobId: company.jobId },
-                                                    });
+                                                    navigate(`/admin/company/details/${company.jobId}`);
                                                 }}> {company.job[0].name} </Link>
                                                 {(company.studentRoundCleared === 0 && company.studentResult) ?
                                                     (<button type="button" className="btn btn-secondary" data-tooltip="Applied">Applied</button>) :
@@ -167,7 +163,7 @@ const AdminStudentDetails = () => {
                                 </div>
                                 <div className="bio-row">
                                     <p className="infoStudent">
-                                        <span>DOB: </span> {dob}
+                                        <span>DOB: </span> {dob.split('T')[0]}
                                     </p>
                                 </div>
                                 <div className="bio-row">

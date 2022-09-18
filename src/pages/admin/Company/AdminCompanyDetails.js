@@ -9,9 +9,6 @@ const AdminCompanyDetails = () => {
     const [isLoading, setLoading] = useState(true);
     const [company, setCompany] = useState({});
     const navigate = useNavigate();
-    const location = useLocation();
-    const state = location.state;
-
 
 
     const handleNewRound = async (e) => {
@@ -44,7 +41,7 @@ const AdminCompanyDetails = () => {
 
     useEffect(() => {
         async function fetchData() {
-            await axios.get(`http://localhost:8080/admin/company/job/details/${state.jobId}`, { withCredentials: true })
+            await axios.get(`http://localhost:8080/admin/company/job/details/${params.jobId}`, { withCredentials: true })
                 .then((res) => {
                     // console.log('After get request:', res.data.data);
                     setCompany(res.data.data);
@@ -59,7 +56,7 @@ const AdminCompanyDetails = () => {
     }, []);
 
     const [newRound, setNewRound] = useState({
-        jobId: state.jobId,
+        jobId: params.jobId,
         round: {
             roundNo: 4,
             activity: "",
@@ -71,7 +68,7 @@ const AdminCompanyDetails = () => {
     })
 
     const [updateRound, setupdateRound] = useState({
-        jobId: state.jobId,
+        jobId: params.jobId,
         round: {
             roundNo: 4,
             activity: "",
@@ -101,14 +98,14 @@ const AdminCompanyDetails = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        navigate("/admin/student-round-table", { state: { jobId: company._id, jobName:company.name, companyName: company.company[0].name, roundNo: e.target.id, listType: e.target.value } });
+        navigate(`/admin/student-round-table/${company.company[0].name}/${company.name}/${e.target.value}/${e.target.id}/${company._id}`);
     }
 
     const handleDeleteJob = async (e) => {
         let confirm = prompt("Enter 'CONFIRM' to delete the job!: ", "");
 
         if (confirm === "CONFIRM") {
-            await axios.delete(`http://localhost:8080/company/job/delete/${state.jobId}`, { withCredentials: true })
+            await axios.delete(`http://localhost:8080/company/job/delete/${params.jobId}`, { withCredentials: true })
                 .then((res) => {
                     alert("Job delete successfully!");
                     navigate('/admin/company-table');

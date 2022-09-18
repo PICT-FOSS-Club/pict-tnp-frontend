@@ -7,14 +7,14 @@ import PdfGenerator from "../Company/pdf/PdfGenerator";
 
 const PlacedStudentTable = () => {
   const [studentTable, setStudentTable] = useState([]);
-  const [branchName, setBranchName] = useState("");
+  // const [branchName, setBranchName] = useState("");
 
   const [isLoading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
-  const [filteredTable, setFilteredTable] = useState([]);
+  // const [filteredTable, setFilteredTable] = useState([]);
   const [branch, setBranch] = useState({
     cs: true,
     it: true,
@@ -281,7 +281,7 @@ const PlacedStudentTable = () => {
                 <td>{student.branch}</td>
                 <td> PhonePe</td>
                 <td>
-                  <Link to="#" onClick={(e)=>{e.preventDefault(); navigate("/admin/student/profile",{state:{studentId: student._id}})}}>View</Link>
+                  <Link to="#" onClick={(e)=>{e.preventDefault(); navigate(`/admin/student/profile/${student._id}`)}}>View</Link>
                 </td>
               </tr>
             ))}

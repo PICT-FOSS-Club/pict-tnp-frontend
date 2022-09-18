@@ -32,9 +32,9 @@ const BasicForm = () => {
 
     return ( 
         <div id="adminCOmpanyTable">
-             <div className="col-md-6 col-sm-6 cl-sx-6 col-6"><h3>Fill the company details</h3></div>
+             <div className="col-md-6 col-sm-6 cl-sx-6 col-6" style={{padding: "10px"}}><h3>Fill the company details</h3></div>
              <form onSubmit={handleSubmit}>
-              <p style={{ fontSize: "15px" }}>
+              <p style={{ fontSize: "15px", padding: "10px"}}>
                 <span style={{ color: "red" }}>*</span> All fields are mandatory
               </p>
               <hr />

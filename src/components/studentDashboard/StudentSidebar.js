@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -30,7 +30,10 @@ export default function StudentSidebar() {
   })
 
 
-
+  const hideDashBoard = () =>{
+    var toggleBtn = document.getElementById("navBarBtn");
+    toggleBtn.click();
+  }
 
 
 function setActiveTag() {
@@ -38,13 +41,13 @@ function setActiveTag() {
   var url = initial_url.split('/');
 
   var path = url[url.length - 1];
-  if(path=='dashboard'){
+  if(path==='dashboard'){
     setActive({...active,dash:'active',company:'',profile:'',changePass:''});
-  }else if(path=='profile'){
+  }else if(path==='profile'){
     setActive({...active,dash:'',company:'',profile:'active',changePass:''});
-  }else if(path=='company-table'){
+  }else if(path==='company-table'){
     setActive({...active,dash:'',company:'active',profile:'',changePass:''});
-  }else if(path=='update'){
+  }else if(path==='update'){
     setActive({...active,dash:'',company:'',profile:'',changePass:'active'});
   }else{
     setActive({...active,dash:'',company:'',profile:'',changePass:''})
@@ -87,7 +90,7 @@ setInterval(() => {
           >
             <div className="position-sticky pt-3 sidebar-sticky">
               <ul className="nav flex-column">
-                <li className="nav-item">
+                <li className="nav-item" onClick={hideDashBoard}>
                   <Link className={`nav-link ${active.dash}`} aria-current="page" to="/student/dashboard">
                     <span
                       data-feather="home"
@@ -97,7 +100,7 @@ setInterval(() => {
                     Dashboard
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={hideDashBoard}>
                   <Link className={`nav-link ${active.company}`} aria-current="page" to="/student/company-table">
                     <span
                       data-feather="home"
@@ -123,7 +126,7 @@ setInterval(() => {
                 </Link>
               </h6>
               <ul className="nav flex-column mb-2">
-                <li className="nav-item">
+                <li className="nav-item" onClick={hideDashBoard}>
                   <Link className={`nav-link ${active.changePass}`} to="/student/password/update">
                     <span
                       data-feather="file-text"
@@ -133,7 +136,7 @@ setInterval(() => {
                     Change Password
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={hideDashBoard}>
                   <Link className={`nav-link ${active.profile}`} to="/student/profile">
                     <span
                       data-feather="file-text"

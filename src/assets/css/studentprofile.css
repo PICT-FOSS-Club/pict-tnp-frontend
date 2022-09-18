@@ -415,8 +415,12 @@ ul.summary-list>li:last-child {
     padding-right: 3%;
   }
 
+  .bio-row{
+    width: 80%;
+  }
   .bootdey .row {
     flex-direction: column;
+    align-items: center;
   }
 }
 

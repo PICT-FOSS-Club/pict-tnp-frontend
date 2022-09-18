@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../assets/css/studentprofile.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 // import { useToasts } from "react-toast-notifications";
 
 const CompanyDetails = () => {
@@ -12,19 +12,15 @@ const CompanyDetails = () => {
 
   const navigate = useNavigate();
   // const { addToast } = useToasts(); //react toast notifications:
-
-  const location = useLocation();
-
-
-  const state = location.state;
+  const params = useParams();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/student/job/details/${state.jobId}`, {
+      .get(`http://localhost:8080/student/job/details/${params.jobId}`, {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log("After get request:", res.data.data);
+        //console.log("After get request:", res.data.data);
         setApplication(res.data.data);
         setLoading(false);
       })
@@ -34,7 +30,7 @@ const CompanyDetails = () => {
       });
 
       axios
-      .get(`http://localhost:8080/student/company/job/eligiblity/${state.jobId}`, {
+      .get(`http://localhost:8080/student/company/job/eligiblity/${params.jobId}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -46,7 +42,7 @@ const CompanyDetails = () => {
         // console.log("Error in get req:", err);
         setLoading(false);
       });
-  }, [state.jobId]);
+  }, [params.jobId]);
 
 
   const handleChangeFile = (e) => {
@@ -185,7 +181,7 @@ const CompanyDetails = () => {
 
                 <div className="companyROInfo">
                   <b>Website: </b>
-                  <a href={`http://${application.websiteUrl}`} target="_blank">
+                  <a href={`http://${application.company[0].websiteUrl}`} target="_blank">
                     <i className="bi bi-globe"></i>
                   </a>
                 </div>
@@ -255,9 +251,9 @@ const CompanyDetails = () => {
                         onChange={handleChangeFile}
                         aria-describedby="emailHelp"
                       />
-                      <div id="emailHelp" className="form-text">
+                      {/* <div id="emailHelp" className="form-text">
                         Select only if, you have other than default resume
-                      </div>
+                      </div> */}
                     </div>
                     <button type="submit" className="btn btn-primary">
                       Apply

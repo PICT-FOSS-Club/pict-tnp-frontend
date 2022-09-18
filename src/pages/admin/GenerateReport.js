@@ -44,7 +44,7 @@ const GenerateReport = () => {
             <div className="col-md-6 col-sm-6 cl-sx-6 col-6">
                 <h3>Placement Report</h3>
             </div>
-            <div className="row my-3">
+            {/* <div className="row my-3">
                 <div className="d-flex justify-content-between">
                     <div className="filter col-md-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">
@@ -64,7 +64,7 @@ const GenerateReport = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* <table className="table table-striped table-hover">
                 <thead className="table-dark">

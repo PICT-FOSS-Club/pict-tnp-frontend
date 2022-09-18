@@ -73,10 +73,10 @@ function App() {
             <Route path="add-company" element={<BasicForm />} />
             <Route path="add-job" element={<AddJobOpen />} />
             <Route path="generate-report" element={<GenerateReport />} />
-            <Route path="student/profile" element={<AdminStudentDetails />} />
-            <Route path="company/details" element={<AdminCompanyDetails />} />
+            <Route path="student/profile/:studentId" element={<AdminStudentDetails />} />
+            <Route path="company/details/:jobId" element={<AdminCompanyDetails />} />
             <Route
-              path="student-round-table"
+              path="student-round-table/:companyName/:jobName/:listType/:roundNo/:jobId"
               element={<AdminStudentRoundTable />}
             />
             <Route path="password/update" element={<AdminUpdatePassword />} />
@@ -94,7 +94,7 @@ function App() {
             <Route path="profile" element={<StudentProfile />} />
             <Route path="password/update" element={<StudentUpdatePassword />} />
             <Route path="company-table" element={<StudentCompanyTable />} />
-            <Route path="company/details" element={<CompanyDetails />} />
+            <Route path="company/details/:jobId" element={<CompanyDetails />} />
           </Route>
         </Route>
 

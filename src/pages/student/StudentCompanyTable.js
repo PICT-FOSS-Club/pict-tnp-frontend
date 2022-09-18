@@ -42,7 +42,7 @@ const StudentCompanyTable = () => {
       <div className="col-md-6 col-sm-6 cl-sx-6 col-6">
         <h3>Company records</h3>
       </div>
-      <div className="row my-3">
+      <div className="row my-3" style={{padding:"10px"}}>
         <div className="d-flex justify-content-between">
           <div className="filter col-md-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
@@ -69,7 +69,7 @@ const StudentCompanyTable = () => {
           company.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
         .map((company) => (
-          <div key={company.name} className="col-md-5 m-3">
+          <div key={company.name} className="col-md-5 my-3 mx-1">
             <div className="card">
               <div className="card-header">
                 <h5>{company.name}</h5>
@@ -88,9 +88,7 @@ const StudentCompanyTable = () => {
                                 to="/student/company/details"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  navigate("/student/company/details", {
-                                    state: { jobId: desc._id },
-                                  });
+                                  navigate(`/student/company/details/${desc._id}`);
                                 }}
                               >
                                 Link

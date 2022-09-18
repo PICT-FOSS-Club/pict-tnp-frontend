@@ -85,7 +85,7 @@ export default function StudentDashboard() {
                         : `Next : Round ${application.studentRoundCleared + 1}`}{" "}
                       -{" "}
                       <Link
-                        to={"/student/company/details"} onClick={(e)=>{ e.preventDefault(); navigate("/student/company/details", { state: { jobId: application.job[0]._id}})}}
+                        to={"/student/company/details"} onClick={(e)=>{ e.preventDefault(); navigate(`/student/company/details/${application.job[0]._id}`)}}
                       >
                         {" "}
                         See schedule{" "}

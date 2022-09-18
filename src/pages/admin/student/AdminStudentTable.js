@@ -146,7 +146,7 @@ const AdminStudentTable = () => {
                             <td>{(student.GT20.status) ? "Yes" : "No"}</td>
                             <td onClick={(e) => {
                                 e.preventDefault();
-                                navigate("/admin/student/profile", { state: { studentId: student._id } });
+                                navigate(`/admin/student/profile/${student._id}`);
                             }}><Link to='#'>View</Link></td>
                         </tr>
                     ))}

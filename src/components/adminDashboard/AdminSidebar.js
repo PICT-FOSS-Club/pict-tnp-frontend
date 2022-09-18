@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../assets/css/style.css";
@@ -25,17 +25,17 @@ export default function AdminSidebar() {
     var url = initial_url.split('/');
 
     var path = url[url.length - 1];
-    if (path == 'dashboard') {
+    if (path === 'dashboard') {
       setActive({ ...active, dash: 'active', company: '', student: '', changePass: '', placeStudent: '', report: '' });
-    } else if (path == 'student-table') {
+    } else if (path === 'student-table') {
       setActive({ ...active, dash: '', company: '', student: 'active', changePass: '', placeStudent: '', report: '' });
-    } else if (path == 'company-table') {
+    } else if (path === 'company-table') {
       setActive({ ...active, dash: '', company: 'active', student: '', changePass: '', placeStudent: '', report: '' });
-    } else if (path == 'update') {
+    } else if (path === 'update') {
       setActive({ ...active, dash: '', company: '', student: '', changePass: 'active', placeStudent: '', report: '' });
-    } else if (path == 'placedStudents') {
+    } else if (path === 'placedStudents') {
       setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: 'active', report: '' });
-    } else if (path == 'generate-report') {
+    } else if (path === 'generate-report') {
       setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: '', report: 'active' });
     } else {
       setActive({ ...active, dash: '', company: '', student: '', changePass: '', placeStudent: '', report: '' })
@@ -43,7 +43,10 @@ export default function AdminSidebar() {
   }
 
 
-
+const hideDashBoard = () =>{
+  var toggleBtn = document.getElementById("navBarBtn");
+  toggleBtn.click();
+}
 
 
   setInterval(() => {
@@ -57,6 +60,7 @@ export default function AdminSidebar() {
         setCookie("usertype", "", { path: "/" });
         setCookie("token1", "", { path: "/" });
         setCookie("username", "", { path: "/" });
+        console.log(cookies)
         navigate("/");
       })
       .catch(err => {
@@ -95,7 +99,7 @@ export default function AdminSidebar() {
             >
               <div className="position-sticky pt-3 sidebar-sticky">
                 <ul className="nav flex-column">
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={hideDashBoard}>
                     <Link className={`nav-link ${active.dash}`} aria-current="page" to="/admin/dashboard">
                       <span
                         data-feather="home"
@@ -105,7 +109,7 @@ export default function AdminSidebar() {
                       Dashboard
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={hideDashBoard}>
                     <Link className={`nav-link ${active.student}`} to="/admin/student-table" >
                       <span
                         data-feather="file"
@@ -115,7 +119,7 @@ export default function AdminSidebar() {
                       Students
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={hideDashBoard}>
                     <Link className={`nav-link ${active.placeStudent}`} to="/admin/placedStudents" >
                       <span
                         data-feather="file"
@@ -125,7 +129,7 @@ export default function AdminSidebar() {
                       Placed Students
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={hideDashBoard}>
                     <Link className={`nav-link ${active.company}`} to="/admin/company-table">
                       <span
                         data-feather="shopping-cart"
@@ -135,7 +139,7 @@ export default function AdminSidebar() {
                       Company
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={hideDashBoard}>
                     <Link className={`nav-link ${active.report}`} to="/admin/generate-report">
                       <span
                         data-feather="shopping-cart"
@@ -162,7 +166,7 @@ export default function AdminSidebar() {
                 </h6>
                 <ul className="nav flex-column mb-2">
  
-                <li className="nav-item" data-bs-toggle="modal" data-bs-target="#addadminform">
+                <li className="nav-item" data-bs-toggle="modal" data-bs-target="#addadminform" onClick={hideDashBoard}>
                   <Link className={`nav-link`} to="#">
                         <span
                           data-feather="file-text"
@@ -173,8 +177,8 @@ export default function AdminSidebar() {
                   </Link>
                   </li>
                   
-                  <li className="nav-item">
-                    <Link className={`nav-link ${active.changePass}`} to="/admin/password/update">
+                  <li className="nav-item" onClick={hideDashBoard}>
+                    <Link className={`nav-link ${active.changePass}`} to="/admin/password/update" >
                       <span
                         data-feather="file-text"
                         className="align-text-bottom"

@@ -6,9 +6,24 @@ import gaurav from "../../assets/img/gaurav.jpg"
 import kedar from "../../assets/img/kedar.jpg"
 import rohit from "../../assets/img/rohit.jpg"
 import vinayak from "../../assets/img/vinayak.JPG"
+import sudarshan from "../../assets/img/sudarshan.jpg"
+import harshal from "../../assets/img/harshal.jpg"
 import {Link} from "react-router-dom";
+import { useState } from "react";
 
 const Team = () => {
+
+  const team = [
+    {src:ved, name: "Ved Patwardhan", desc: "Project Support",git: "https://github.com/vedpatwardhan", linkedin: "https://www.linkedin.com/in/ved-patwardhan", email: "mailto:vedpat3@gmail.com"},
+    {src:sudarshan, name: "Sudarshan Gawale", desc: "Project Support",git: "https://github.com/g-sudarshan", linkedin: "https://www.linkedin.com/in/g-sudarshan/", email: ""},
+    {src:devansh, name: "Devansh Mundada", desc: "Project Support",git: "https://github.com/devansh2611", linkedin: "https://www.linkedin.com/in/devansh-mundada", email: "mailto:mundada.devansh@gmail.com"},
+    {src:harshal, name: "Harshal Walunj", desc: "Project Support",git: "https://github.com/harshal239", linkedin: "https://www.linkedin.com/in/harshalwalunj127/", email: "mailto:harshalwalunj49@gmail.com"},
+    {src:sangmeshwar, name: "Sangmeshwar Mahajan", desc: "Frontend",git: "https://github.com/sangmesh04/", linkedin: "https://www.linkedin.com/in/mahajan-sangmeshwar/", email: "mailto:mahajansangmeshwar04@gmail.com"},
+    {src:vinayak, name: "Vinayak Jamadar", desc: "Backend",git: "https://github.com/VinayakJamadar", linkedin: "https://www.linkedin.com/in/vinayak-jamadar-979879228", email: "mailto:vinayaksjamadar@gmail.com"},
+    {src:rohit, name: "Rohit Patil", desc: "Backend",git: "https://github.com/rohitvpatil0810", linkedin: "https://www.linkedin.com/in/rohit-patil-35b08b209", email: "mailto:rohitvpatil0810@gmail.com"},
+    {src:kedar, name: "Kedar Koshti", desc: "Backend",git: "https://github.com/kedarkk1", linkedin: "https://www.linkedin.com/in/kedar-koshti-700804218/", email: "mailto:officialkedark1@gmail.com"},
+    {src:gaurav, name: "Gaurav Somani", desc: "Backend",git: "https://github.com/gaurav-750", linkedin: "https://linkedin.com/in/gaurav-somani-294233218", email: "mailto:gauravsomani52750@gmail.com"},
+  ]
     return ( 
       <>
       <div className="card text-center">
@@ -24,230 +39,43 @@ const Team = () => {
           <h2>Our Team</h2>
         </div>
         <ul className="row">
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={ved}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Ved Patwardhan
-              </h3>
-              <p>Project Support</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/vedpatwardhan">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/ved-patwardhan">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:vedpat3@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={devansh}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Devansh Mundada
-              </h3>
-              <p>Project Support</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/devansh2611">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/devansh-mundada">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:mundada.devansh@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={sangmeshwar}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Sangmeshwar Mahajan
-              </h3>
-              <p>Frontend</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/sangmesh04/">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/mahajan-sangmeshwar/">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                 <a href="mailto:mahajansangmeshwar04@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={vinayak}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Vinayak Jamadar
-              </h3>
-              <p>Backend</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/vinayaksj1234">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/vinayak-jamadar-979879228">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:vinayaksjamadar@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={rohit}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Rohit Patil
-              </h3>
-              <p>Backend</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/rohitvpatil0810">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/rohit-patil-35b08b209">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:rohitvpatil0810@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={kedar}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Kedar Koshti
-              </h3>
-              <p>Backend</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/kedarkk1">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/kedar-koshti-700804218/">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:officialkedark1@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="col-12 col-md-6 col-lg-3">
-            <div className="cnt-block equal-hight" style={{ height: 349 }}>
-              <figure>
-                <img
-                  src={gaurav}
-                  className="img-responsive"
-                  alt=""
-                />
-              </figure>
-              <h3>
-                Gaurav Somani
-              </h3>
-              <p>Backend</p>
-              <ul className="follow-us clearfix">
-                <li>
-                  <a href="https://github.com/gaurav-750">
-                      <i className="bi bi-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://linkedin.com/in/gaurav-somani-294233218">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:gauravsomani52750@gmail.com">
-                    <i className="bi bi-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+          {
+            team && team.map((t, key)=>
+              <li className="col-12 col-md-6 col-lg-3" key={key}>
+              <div className="cnt-block equal-hight" style={{ height: 349 }}>
+                <figure>
+                  <img
+                    src={t.src}
+                    className="img-responsive"
+                    alt=""
+                  />
+                </figure>
+                <h3>
+                  {t.name}
+                </h3>
+                <p>{t.desc}</p>
+                <ul className="follow-us clearfix">
+                  <li>
+                    <a href={t.git}>
+                        <i className="bi bi-github"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={t.linkedin}>
+                      <i className="bi bi-linkedin"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={t.email}>
+                      <i className="bi bi-envelope"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            )
+          }
+
         </ul>
       </div>
     </section>

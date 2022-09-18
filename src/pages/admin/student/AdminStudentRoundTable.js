@@ -1,12 +1,12 @@
 import axios from "axios";
-import * as XLSX from "xlsx";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "../../../assets/css/admincompanytable.css";
 
 const AdminStudentRoundTable = () => {
   axios.defaults.withCredentials = true;
+  const params = useParams();
 
   const [studentTable, setStudentTable] = useState([]);
 
@@ -14,14 +14,11 @@ const AdminStudentRoundTable = () => {
 
   const [isLoading, setLoading] = useState(true);
 
-  const location = useLocation();
-
-  const state = location.state;
   const navigate = useNavigate();
 
   const [roundDetails, setRoundDetails] = useState({
-    jobId: state.jobId,
-    roundNo: state.roundNo,
+    jobId: params.jobId,
+    roundNo: params.roundNo,
     qualifiedStudentIds: [],
     disqualifiedStudentIds: [],
   });
@@ -30,7 +27,7 @@ const AdminStudentRoundTable = () => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:8080/admin/company/${state.listType}/${state.roundNo}/${state.jobId}`,
+        `http://localhost:8080/admin/company/${params.listType}/${params.roundNo}/${params.jobId}`,
         { withCredentials: true }
       )
       .then((res) => {
@@ -84,7 +81,7 @@ const AdminStudentRoundTable = () => {
   return (
     <div id="adminCOmpanyTable">
       <div className="col-md-4 col-sm-4 col-sx-4 col-4">
-        <h3>{`${state.companyName} (${state.jobName}) Round ${state.roundNo} - ${state.listType} Students`}</h3>
+        <h3>{`${params.companyName} (${params.jobName}) Round ${params.roundNo} - ${params.listType} Students`}</h3>
       </div>
       <div className="row my-3">
         <div className="d-flex justify-content-between">
@@ -106,7 +103,7 @@ const AdminStudentRoundTable = () => {
             </div>
           </div>
 
-          <form className="col-md-5">
+          {/* <form className="col-md-5">
               <div className="myFlex">
                   <div>
                       <label htmlFor="formFileSm" className="form-label">Update round list</label>
@@ -114,14 +111,14 @@ const AdminStudentRoundTable = () => {
                   </div>
                   <button type="submit" className="myBtn mx-1 btn btn-primary">Update</button>
               </div>
-          </form>
+          </form> */}
 
           <div className="col-md-3" style={{ marginTop: "34px" }}>
             <ReactHTMLTableToExcel
               id="test-table-xls-button"
               className="btn btn-success"
               table="table-to-xls"
-              filename={`${state.companyName}-Round-${state.roundNo}-${state.listType}`}
+              filename={`${params.companyName}-Round-${params.roundNo}-${params.listType}`}
               sheet="tablexlsx"
               buttonText="Download Excel"
             />
@@ -171,9 +168,7 @@ const AdminStudentRoundTable = () => {
                 <td
                   onClick={(e) => {
                     e.preventDefault();
-                    navigate("/admin/student/profile", {
-                      state: { studentId: student._id },
-                    });
+                    navigate(`/admin/student/profile/${student._id}`);
                   }}
                 >
                   <Link to="#">View</Link>
@@ -187,7 +182,6 @@ const AdminStudentRoundTable = () => {
                       disabled = {(student.LTE20.status || student.GT20.status) ? true : false}
 
                       onChange={(e) => {
-
                       e.target.checked
                           ? setRoundDetails({
                               ...roundDetails,

@@ -113,7 +113,7 @@ const AdminCompanyTable = () => {
       <div className="col-md-6 col-sm-6 cl-sx-6 col-6">
         <h3>Company records</h3>
       </div>
-      <div className="row my-3">
+      <div className="row my-3" style={{padding: "10px"}}>
         <div className="d-flex justify-content-between">
           <div className="filter col-md-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
@@ -197,9 +197,7 @@ const AdminCompanyTable = () => {
                                 to="#"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  navigate("/admin/company/details", {
-                                    state: { jobId: desc._id },
-                                  });
+                                  navigate(`/admin/company/details/${desc._id}`);
                                 }}
                               >
                                 Link
