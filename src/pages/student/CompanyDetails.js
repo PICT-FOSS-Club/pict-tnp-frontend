@@ -49,7 +49,7 @@ const CompanyDetails = () => {
 
     axios
       .get(
-        `http://localhost:8080/student/company/job/eligiblity/${state.jobId}`,
+        `http://localhost:8080/student/company/job/eligiblity/${params.jobId}`,
         {
           withCredentials: true,
         }
@@ -152,7 +152,7 @@ const CompanyDetails = () => {
                 </div>
                 {fileAvailable ? (
                   <iframe
-                    src={`http://localhost:8080/student/job/files/${state.jobId}`}
+                    src={`http://localhost:8080/student/job/files/${params.jobId}`}
                     frameborder="0"
                   ></iframe>
                 ) : (
